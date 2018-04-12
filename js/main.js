@@ -412,3 +412,6 @@ function niceScroll(eve){
 
 niceScroll(".scroll");
 niceScroll(".messages");
+
+
+
