@@ -23,7 +23,7 @@ class session{
 	/* start of proberties */
 	private $tableName 			= "session";// set table name "DATABASE TABLE NAME"
 	private $uploadsDir			= "uploads/sessionFiles/"; // set directors of uploading file "NOT USED"
-	private $insertArray 		= array("sessionName","startPrice","autoSell", "Blind", "startTime", "endTime", "sessionPassword","productId", "sessionOwnerId", "increamentValue"); // this array of data base cols
+	private $insertArray 		= array("sessionName","startPrice","autoSell", "Blind", "startTime", "endTime", "sessionPassword","productId", "sessionOwnerId"); // this array of data base cols
 	private $insertOfferArray 	= array("offer", "userId", "sessionId", "offerTime");
 	private $sessionData;
 	/* end of proberties */
@@ -75,9 +75,7 @@ class session{
 			$sessionEndTime, 
 			$sessionPassword, 
 			$productId, 
-			$ownerId,
-			$sessionIncreament
-		);// end of session values array
+			$ownerId);// end of session values array
 		$connectMazadDB->insert($this->insertArray, $valuesArray);// this step for insert data
 		/*echo "<pre>";
 		print_r($_POST); //NOTE THAT ::: this for debug only :::
@@ -100,22 +98,20 @@ class session{
 		$getSessionOffersByIdFromDatabase = new dataBase(HOST, DB_NAME, DB_USER, DB_PASS);
 		$getSessionOffersByIdFromDatabase->setTable('sessionOffers');
 		$sessionOfferData = $getSessionOffersByIdFromDatabase->select("offer,userId, offerTime", array("sessionId"), array($sessionId));
-		if(sizeof($sessionOfferData) > 0){
-			$offerDataAsFrontEnd = array();
-			$getSessionOffersByIdFromDatabase->setTable('user');
-			for($i = (int)sizeof($sessionOfferData )-1; $i >= 0 ; $i--){
-				$currentUserOffer = $getSessionOffersByIdFromDatabase->select("imagePath, firstName", array('id'), array($sessionOfferData[$i]['userId']));
-				$offerDataAsFrontEnd[] = array(
-											'offer'=>$sessionOfferData[$i]['offer'],
-											'image'=>$currentUserOffer[0]['imagePath'],
-											'name'=>$currentUserOffer[0]['firstName'],
-											'time'=>$sessionOfferData[$i]['offerTime']
-										);
-	
-			}//end of for
-		}//end of if
+		$offerDataAsFrontEnd = array();
+		$getSessionOffersByIdFromDatabase->setTable('user');
+		for($i = (int)sizeof($sessionOfferData )-1; $i >= 0 ; $i--){
+			$currentUserOffer = $getSessionOffersByIdFromDatabase->select("imagePath, firstName", array('id'), array($sessionOfferData[$i]['userId']));
+			$offerDataAsFrontEnd[] = array(
+										'offer'=>$sessionOfferData[$i]['offer'],
+										'image'=>$currentUserOffer[0]['imagePath'],
+										'name'=>$currentUserOffer[0]['firstName'],
+										'time'=>$sessionOfferData[$i]['offerTime']
+									);
+
+		}
 		return $offerDataAsFrontEnd;
-	}//end of function
+	}
 
 	public function insertOffer(){
 		
@@ -133,22 +129,16 @@ class session{
 		if($connectToDatabase->getMaxValueByColumnName("offer",array("sessionId"), array($_SESSION['sessionId']))[0][0] >= $offer){
 			$errorReportingOfOffer[] = "This Offer Less than Current Offer";
 		}//end of if
-		if(!$this->checkIncreamentValue($offer)){
-			$errorReportingOfOffer[] = "This Offer Less than increament value";
-		}
-
-		if(!$this->checkWallet($offer)){
-			$errorReportingOfOffer[] = "This Offer Less than your money";
-		}
-		if(!$this->limitationOfBalance($offer)){
-			$errorReportingOfOffer[] = "your balance is not enough";
-		}
+        if($this->checkLastOfferUser()){
+            $errorReportingOfOffer[] = "you are already top offer";
+        }
 		//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 		if(sizeof($errorReportingOfOffer) == 0){
-			$this->changeActiveBalanceForTwoUsers($offer);
 			$connectToDatabase->insert($this->insertOfferArray, array($offer, $userId, $_SESSION['sessionId'], $time));
+            $connectToDatabase->setTable('session');
+            $connectToDatabase->update(array('currentOffer','currentUser'), array($offer, $_SESSION['id']), array('id'), array($_SESSION['sessionId']));
 		}//end of if
-		
+
 		return json_encode($errorReportingOfOffer);
 		
 		/*
@@ -162,6 +152,13 @@ class session{
 		*/
 	}
 
+    
+    public function checkLastOfferUser(){
+        $connectToDatabase = new dataBase(HOST, DB_NAME, DB_USER, DB_PASS);
+        $connectToDatabase->setTable('session');
+        $sessionData = $connectToDatabase->select('currentUser', array('id'), array($_SESSION['sessionId']));
+        return ($sessionData[0]['currentUser'] == $_SESSION['id'])?true:false;
+    }
 	public function getNewOffers($bigSessionOffer){
 		$connectToDatabase	= new dataBase(HOST, DB_NAME, DB_USER, DB_PASS);
 		$connectToDatabase->setTable('sessionOffers');
@@ -235,75 +232,6 @@ class session{
 			$messageAsView[] = $userInfoAsRow;
 		}//end of for
 		return $messageAsView;
-	}//end of function
-
-	public function checkIncreamentValue($newOffer){
-		$bigOffer = -1;
-		$connectToDatabase	= new dataBase(HOST, DB_NAME, DB_USER, DB_PASS);
-		$connectToDatabase->setTable('sessionOffers');
-		$allOffers = $connectToDatabase->getMaxValueByColumnName("offer", array("sessionId"), array($_SESSION['sessionId']));
-		if((int)sizeof($allOffers) > 0){
-			$bigOffer = $allOffers[0]['max'];
-		}else{
-			$connectToDatabase->setTable('session');
-			$allOffers = $connectToDatabase->select("startPrice", array("id"), array($_SESSION['sessionId']));
-			$bigOffer = intval($allOffers[0]['startPrice']);
-		}
-		$connectToDatabase->setTable('session');
-		$sessionIncreament = $connectToDatabase->select("increamentValue", array("id"), array($_SESSION['sessionId']))[0]['increamentValue'];
-		$newOfferCheck = $bigOffer * ($sessionIncreament/100);
-		return (($newOffer - $bigOffer) >= $newOfferCheck)?true:false;
-	}//end of function
-
-	public function checkWallet($Offer){
-		$connectToDatabase = new dataBase(HOST, DB_NAME, DB_USER, DB_PASS);
-		$connectToDatabase->setTable('wallet');
-		$myWallet = $connectToDatabase->select('realBalance, activeBalance', array('ownerId'), array($_SESSION['id']));
-		//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx
-		if(sizeof($myWallet)){
-			$money= $myWallet[0]['realBalance']-$myWallet[0]['activeBalance'];
-			return ($Offer <= $money)?true:false;
-		}
-		// add wallet rows for all
-		//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxx
-	}
-
-	public function limitationOfBalance($offer){
-		$connectToDatabase = new dataBase(HOST, DB_NAME, DB_USER, DB_PASS);
-		$connectToDatabase->setTable('wallet');
-		$sessionData = $connectToDatabase->select('realBalance, activeBalance', array('ownerId'), array($_SESSION['id']));
-		//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxx
-		if(sizeof($sessionData)){
-			$isBig = $sessionData[0]['activeBalance'] + $offer;
-			return ($sessionData[0]['realBalance'] >= $isBig)?true:false;
-		}
-		//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxx
-		
-	}
-
-public function noMoreBitsPlease ($userId){
-	$connectToDatabase = new dataBase(HOST, DB_NAME, DB_USER, DB_PASS);
-	$connectToDatabase->setTable('session');
-	//$connectToDatabase->update(array(''), array(), array(), array());
-
-}
-
-
-	public function changeActiveBalanceForTwoUsers($offer){
-		$connectToDatabase = new dataBase(HOST, DB_NAME, DB_USER, DB_PASS);
-		$connectToDatabase->setTable('sessionOffers');
-		$sessionOffers = $connectToDatabase->select("*", array('sessionId'),array($_SESSION['sessionId']));
-		if((int)sizeof($sessionOffers) > 0){
-			$maxUserOfferInfo = $connectToDatabase->getMaxValueByColumnName("offer", array('sessionId'),  array($_SESSION['sessionId']));
-			$connectToDatabase->setTable('wallet');
-			$activeBalanceForPrevUser = $connectToDatabase->select("activeBalance", array('ownerId'),array(1));
-			print_r($maxUserOfferInfo);
-			$minusOfferFromPreviousUser = $activeBalanceForPrevUser[0]['activeBalance'] - $maxUserOfferInfo[0]['max'];
-			$connectToDatabase->update(array('activeBalance'), array($minusOfferFromPreviousUser), array('ownerId'), array(1));
-			$activeBalanceForNewOffer = $connectToDatabase->select("activeBalance", array('ownerId'), array($_SESSION['id']));
-			$newActiveBalanceForNewOffer = $offer + $activeBalanceForNewOffer[0]['activeBalance'];
-			$connectToDatabase->update(array('activeBalance'), array($newActiveBalanceForNewOffer), array('ownerId'), array($_SESSION['id']));
-		}
 	}
 }//end of class session
 
