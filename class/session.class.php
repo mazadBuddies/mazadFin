@@ -129,14 +129,9 @@ class session{
 		if($connectToDatabase->getMaxValueByColumnName("offer",array("sessionId"), array($_SESSION['sessionId']))[0][0] >= $offer){
 			$errorReportingOfOffer[] = "This Offer Less than Current Offer";
 		}//end of if
-        if($this->checkLastOfferUser()){
-            $errorReportingOfOffer[] = "you are already top offer";
-        }
 		//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 		if(sizeof($errorReportingOfOffer) == 0){
 			$connectToDatabase->insert($this->insertOfferArray, array($offer, $userId, $_SESSION['sessionId'], $time));
-            $connectToDatabase->setTable('session');
-            $connectToDatabase->update(array('currentOffer','currentUser'), array($offer, $_SESSION['id']), array('id'), array($_SESSION['sessionId']));
 		}//end of if
 
 		return json_encode($errorReportingOfOffer);
@@ -152,13 +147,6 @@ class session{
 		*/
 	}
 
-    
-    public function checkLastOfferUser(){
-        $connectToDatabase = new dataBase(HOST, DB_NAME, DB_USER, DB_PASS);
-        $connectToDatabase->setTable('session');
-        $sessionData = $connectToDatabase->select('currentUser', array('id'), array($_SESSION['sessionId']));
-        return ($sessionData[0]['currentUser'] == $_SESSION['id'])?true:false;
-    }
 	public function getNewOffers($bigSessionOffer){
 		$connectToDatabase	= new dataBase(HOST, DB_NAME, DB_USER, DB_PASS);
 		$connectToDatabase->setTable('sessionOffers');
@@ -232,6 +220,33 @@ class session{
 			$messageAsView[] = $userInfoAsRow;
 		}//end of for
 		return $messageAsView;
+	}
+
+	public function getAllSessions(){
+			$sessDataAsView = array();
+			 $connect = new dataBase(HOST , DB_NAME , DB_USER , DB_PASS);
+             $connect->setTable("session");
+             $sessData=$connect->select('sessionName, startPrice, startTime, sessionOwnerId, productId, id');
+             if(sizeof($sessData)>0){
+             	for($i = 0 ;$i<sizeof($sessData);$i++){
+             		$connect->setTable("user");
+             		$userInfo = $connect->select("firstName, imagePath", array('id'), array($sessData[$i]['sessionOwnerId']));
+             		$connect->setTable("product");
+             		$prouductInfo = $connect->select('imagePath', array('id'), array($sessData[$i]['productId']));
+             		$connect->setTable("sessionEnters");
+             		$sessionEntersCount = sizeof($connect->select('id', array('sessionId'), array($sessData[$i]['id'])));
+
+             		$sessDataAsRow = array("sessionName" => $sessData[$i]['sessionName'],
+             								"startPrice" => $sessData[$i]['startPrice'],
+             								"firstName" =>  $userInfo[0]['firstName'],
+             								"imagePath" =>  $userInfo[0]['imagePath'],
+             								"productImage" => $prouductInfo[0]['imagePath'],
+             								"sessionEnters" => $sessionEntersCount 
+             							); 
+             		$sessDataAsView[] = $sessDataAsRow;
+             	}
+             }
+             return $sessDataAsView;
 	}
 }//end of class session
 
