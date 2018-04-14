@@ -1,11 +1,12 @@
 <?php
-    $activeSessionId = 4;
+    $activeSessionId = 2;
     $_SESSION['sessionId'] = $activeSessionId;
     $masterSession = new session();
-    $masterSession->getSessionById($activeSessionId);
+    $sessionData = $masterSession->getSessionById($activeSessionId);
     $offerTableData = $masterSession->getOffersBySesionId($activeSessionId);
     //$masterSession->getNewOffers(123344);
 ?>
+
 <section class="dashboard session-all col-11">
     <div class="container-fluid">
         <div class="session-titles">
@@ -13,7 +14,9 @@
             <div class="time"> 00:00:00</div>
             <div class="blind"></div>
         </div><!--end of sessionTitles-->
-
+<?php
+    print_r($sessionData);
+?>
         <div class="sessionConnect">
             <div class="row">
                 <div class="sessionOffers col-7">
@@ -114,8 +117,11 @@
                 </div><!--end of sessionBroadCast-->
             </div><!--end of row-->
         </div><!--end of sessionConnect-->
-        <div class="cir2">
+        <div class="cir2 open-sessionInfo">
             <i class="fas fa-angle-double-down"></i>
+            <?php
+                include INCLUDES_DIR . "pops/sessionInfo.pop.php";
+            ?>
         </div><!--end of cir-->
         <div class="preview">
             

@@ -230,7 +230,7 @@
                                 <th>Date</th>
                                 <th>Details</th>
                             </tr>
-    
+
                             <tr>
                                 <th>
                                     <div class="cir">

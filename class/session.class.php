@@ -83,15 +83,38 @@ class session{
 	}//end of addNewSession function
 	/* start of methods*/
 
+	public function generateImagePath($path){
+		return $this->uploadsDir . $path;
+	}
+
 	public function getSessionById($sessionId){
 		$getSessionByIdFromDatabase = new dataBase(HOST, DB_NAME, DB_USER, DB_PASS);
 		$getSessionByIdFromDatabase->setTable('session');
-		$this->sessionData = $getSessionByIdFromDatabase->select("*", array("id"), array($sessionId));
+		$sessionData = $getSessionByIdFromDatabase->select("*", array("id"), array($sessionId));
+		$getSessionByIdFromDatabase->setTable('product');
+		$productData = $getSessionByIdFromDatabase->select("*", array("id"), array($sessionData[0]['productId']));
+		$getSessionByIdFromDatabase->setTable('categorie');
+		$categorieNameGetById = $getSessionByIdFromDatabase->select("catiegorieName", array("id"), array($productData[0]['catId']));
+		$this->sessionData = array(
+			"sessionName" 	=> $sessionData[0]['sessionName'],
+			"startPrice"  	=> $sessionData[0]['startPrice'],
+			"autoSell"		=> $sessionData[0]['autoSell'],
+			"blind"			=> $sessionData[0]['Blind'],
+			"startTime"		=> $sessionData[0]['startTime'],
+			"endTime"		=> $sessionData[0]['endTime'],
+			"sessionOwnerId"=> $sessionData[0]['sessionOwnerId'],
+			"increament"	=> $sessionData[0]['increamentValue'],
+			"productName"	=> $productData[0]['productName'],
+			"tags"			=> $productData[0]['tags'],
+			"productImage"	=> $this->generateImagePath($productData[0]['imagePath']),
+			"catName"		=> $categorieNameGetById[0]['catiegorieName']
+		);
+		
 		return $this->sessionData;
 	}//end of getSessionById
 
 	public function getSessionName(){
-		return $this->sessionData[0]['sessionName'];
+		return $this->sessionData['sessionName'];
 	}// end of get sessionName
 
 	public function getOffersBySesionId($sessionId){

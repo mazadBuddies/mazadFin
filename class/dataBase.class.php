@@ -382,65 +382,6 @@
             }//end of edit function
     }//end of class data base
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     
 /*
 $con = new dataBase(HOST, DB_NAME, DB_USER, DB_PASS);

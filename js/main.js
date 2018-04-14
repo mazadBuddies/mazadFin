@@ -413,5 +413,17 @@ function niceScroll(eve){
 niceScroll(".scroll");
 niceScroll(".messages");
 
+//hdkjashkja
+function temp(){
+    "use strict";
+    $('.session-info').css("display","block").addClass("animated fadeInUpBig").removeClass('hinge');
+}
 
+function closeSessionPanel(){
+    $('.session-info').addClass("animated hinge").removeClass('fadeInUpBig');
+    //css("display","none")
+}//end of funciton closeSessionPanel
 
+$('.open-sessionInfo').on("click", temp);
+$('.session-info').on("dblclick", closeSessionPanel);
+temp();
