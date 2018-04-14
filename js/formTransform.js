@@ -6,14 +6,15 @@ function changeFormTitle(name){
         $('.name-1 ').slideUp();
     }else if(name == 'Sign Up'){
         $('#names').prepend(names);
+        $('#names').append(userName);
+        $('#pass').append(comPassword);
+        $('.re').append(gender);
+        //$('.re').append(image);
+        $('.rePassword').append('<script src="js/main.js">');
         $('.firstName').addClass('animated bounceInLeft');
         $('.lastName').addClass('animated bounceInRight');
-        $('#names').append(userName);
         $('.userName').addClass('animated bounceInDown');
-        $('#pass').append(comPassword);
         $('.rePassword').addClass('animated bounceInDown');
-        $('.rePassword').append('<script src="js/main.js">');
-        $('.re').append(gender);
         $('.gender').addClass('animated bounceInDown');
     }
 }
@@ -79,6 +80,16 @@ var gender =
             '</div>'+
         '</div>'+
     '</div>';
+
+    var image = '<div class="row name-1">' +
+                    '<div class="userName col-12">'+
+                        '<label for="userName" class="col-12">Image</label>'+
+                            '<div class="border">'+
+                                '<input type="file" class="col-12" name="images"  placeholder="eg. mr.robot" id="images"/>'+
+                            '</div>'+
+                    '</div>'+
+                '</div>';
+
 $('div.selectForm span').on("click", function(){
     "use strict";
     $(this).addClass('active').siblings().removeClass('active');

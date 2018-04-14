@@ -410,8 +410,8 @@ function niceScroll(eve){
 }
 
 
-niceScroll(".scroll");
-niceScroll(".messages");
+//niceScroll(".scroll");
+//niceScroll(".messages");
 
 //hdkjashkja
 function temp(){

@@ -3,9 +3,9 @@
     include ROOT_APP . "init.php";
     if(isLogin())header("location:index.php");
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
-    $r = new user($_POST['email'], $_POST['password']);
-    $r->logIn();
-}
+        $masterUser = new user();
+        (isset($_POST['firstName']))?$masterUser->signUp() : $masterUser->logIn($_POST['email'], $_POST['password']);
+    }//end of if
 ?>
 <section class="body">
     <div class="login col-lg-4 col-md-6 col-sm-8">
@@ -13,13 +13,10 @@
             <span class="active" data-name="Sign In">Sign In</span>
             <span data-name="Sign Up">Sign Up</span>
         </div>
-        <!--<span class="dir-signUp">
-            New to Mazad? <a href="signup.php">Sign up</a>
-        </span>-->
         <div class="form">
             <div class="myCon">
                 <h2 class="signIn head" id="formTitle"></h2>
-                <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" id="frm">
+                <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" id="frm" enctype="multipart/form-data">
 
                     <div class="row" id="names">
                         <div class="email col-12">
@@ -38,19 +35,24 @@
                             </div>
                         </div>
                     </div>
-
+                    <div class="row">
+                    <div class="userName col-12">
+                        <label for="userName" class="col-12">Image</label>
+                            <div class="border">
+                                <input type="file" class="col-12" name="images"  placeholder="eg. mr.robot" id="images"/>
+                            </div>
+                    </div>
+                '</div>
                     <div class="sup">
                         <input type="submit" id="submit1" value = "Sign in"/>
                     </div>
+
                 </form>
             </div>
         </div>
     </div>
 </section>
 
-<?php 
-    //include ROOT_APP . "signup.php";
-?>    
 <script src=<?php echo "'" . JS_DIR . "jquery.min.js" . "'";?> ></script>
 <script src=<?php echo "'" . JS_DIR . "popper.min.js" . "'";?>></script>
 <script src=<?php echo "'" . JS_DIR . "bootstrap.min.js" . "'";?>></script>

@@ -1,10 +1,9 @@
 <?php
     $activeSessionId = 2;
-    $_SESSION['sessionId'] = $activeSessionId;
-    $masterSession = new session();
-    $sessionData = $masterSession->getSessionById($activeSessionId);
-    $offerTableData = $masterSession->getOffersBySesionId($activeSessionId);
-    //$masterSession->getNewOffers(123344);
+    $_SESSION['sessionId']  = $activeSessionId;
+    $masterSession          = new session();
+    $sessionData            = $masterSession->getSessionById($activeSessionId);
+    $offerTableData         = $masterSession->getOffersBySesionId($activeSessionId);
 ?>
 
 <section class="dashboard session-all col-11">
@@ -14,9 +13,7 @@
             <div class="time"> 00:00:00</div>
             <div class="blind"></div>
         </div><!--end of sessionTitles-->
-<?php
-    print_r($sessionData);
-?>
+        
         <div class="sessionConnect">
             <div class="row">
                 <div class="sessionOffers col-7">
@@ -63,7 +60,6 @@
                                 <button class="myBtn ajax click addNewOffer"  data-url="class/session.class.php" data-action="INSERT_OFFER" data-accept="0" data-method="POST" data-values="" data-function="1"/>Offer</button>
                         </div>
                         <div class="errors">
-                            
                         </div>
                     </div>
                 </div><!--end of sessionOffers-->
@@ -124,7 +120,6 @@
             ?>
         </div><!--end of cir-->
         <div class="preview">
-            
         </div><!--end of preview-->
     </div><!--end of container-->
 </section>
