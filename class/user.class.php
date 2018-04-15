@@ -43,11 +43,44 @@ class user{
     }//end of function
 
     public function signUp(){
-        
+        $validationErorrs = array();
         $connect = new dataBase(HOST, DB_NAME, DB_USER, DB_PASS);
         $connect->setTable('user');
-        $time		= date('Y-m-d H:i:s');
-        $insertColArrayName = array(
+        $time		= date('Y-m-d H:i:s'); // this var. for regDate
+        $masterValid = new validation();
+
+        if(!$masterValid->isAlpha($_POST['firstName'])){
+            $validationErorrs["firstName"] = "First Name Should be letters only";
+        }
+
+        if(!$masterValid->isAlpha($_POST['lastName'])){
+            $validationErorrs["lastName"] = "Last Name Should be letter only";
+        }
+
+        if(!$masterValid->isEmail($_POST['email'])){
+            $validationErorrs["email"] = "Email not Valid";
+        }
+
+        if(sizeof($connect->select("userName", array("userName"), array($_POST['userName']))) > 0){
+            $validationErorrs["userName"] = "User Name is already exist";
+        }
+
+        if(sizeof($connect->select("id", array("email"), array($_POST['email']))) > 0){
+            $validationErorrs["emailEx"] = "Email is already exist";
+        }
+
+        if(sizeof($connect->select("id", array("creditCard"), array($_POST['creditCard']))) > 0){
+            $validationErorrs["credit"] = "Credit Card is already exist";
+        }
+
+        if($_POST['password'] != $_POST['comPassword']){
+            $validationErorrs["passwordEQ"] = "Your Confirmation password not equal password";
+        }
+
+        echo "<pre>";
+        print_r($validationErorrs);
+        echo "</pre>";
+        /*$insertColArrayName = array(
                             'firstName',
                             'lastName', 
                             'gender', 
@@ -72,6 +105,7 @@ class user{
             );
         $this->uploadImage();
         $connect->insert($insertColArrayName, $valuesColArray);
+        */
     }//end of function signUp
 
     public function uploadImage(){

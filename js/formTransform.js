@@ -3,23 +3,44 @@ function changeFormTitle(name){
     $('#formTitle').fadeOut(10).html(fontAwesome + name).fadeIn(400);
     $('#submit1').attr('value',name);
     if(name == 'Sign In'){
-        $('.name-1 ').slideUp();
+        signInAction();
     }else if(name == 'Sign Up'){
-        $('#names').prepend(names);
-        $('#names').append(userName);
-        $('#pass').append(comPassword);
-        $('.re').append(gender);
-        $('.re').append(image);
-        $('.rePassword').append('<script src="js/main.js">');
-        $('.firstName').addClass('animated bounceInLeft');
-        $('.lastName').addClass('animated bounceInRight');
-        $('.userName').addClass('animated bounceInDown');
-        $('.rePassword').addClass('animated bounceInDown');
-        $('.gender').addClass('animated bounceInDown');
+        signUpAction();
     }
 }
 
-changeFormTitle('Sign In');
+function signInAction(){
+    $('.name-1 ').slideUp();
+    setCookie("sign", "in", 1);
+}
+
+function signUpAction(){
+    $('#names').prepend(names);
+    $('#names').append(userName);
+    $('#pass').append(comPassword);
+    $('.re').append(gender);
+    $('.re').append(image);
+    $('.rePassword').append('<script src="js/main.js">');
+    $('.firstName').addClass('animated bounceInLeft');
+    $('.lastName').addClass('animated bounceInRight');
+    $('.userName').addClass('animated bounceInDown');
+    $('.rePassword').addClass('animated bounceInDown');
+    $('.gender').addClass('animated bounceInDown');
+    setCookie("sign", "up", 1);
+}
+
+function setActiveForm(){
+    "use strict";
+    if(getCookie("sign") === 'up'){
+        changeFormTitle('Sign Up');
+
+    }else if(getCookie("sign") === 'in'){
+        changeFormTitle('Sign In');
+    }
+    console.log(getCookie("sign"));
+}
+
+setActiveForm();
 var names = 
     '<div class="row name-1">' + 
         '<div class="firstName col-6">' + 
@@ -51,6 +72,12 @@ var names =
                             '<div class="border">'+
                                 '<input type="text" class="col-12" name="creditCard" placeholder="15 Number"/>'+
                             '</div>'+
+                        '</div>'+
+                    '</div>'+
+                    '<div class="lastName  name-1">'+
+                        '<label for="endTime" class="col-12">Birth Date</label>'+
+                        '<div class="border">'+
+                            '<input type="date" name="endTime"  placeholder="select Your birth date" class="name-2"/>'+
                         '</div>'+
                     '</div>';
 

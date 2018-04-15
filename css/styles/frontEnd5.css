@@ -40,6 +40,9 @@ a {
 .display-none {
   display: none; }
 
+.name-2 {
+  width: 96%; }
+
 @font-face {
   font-family: 'Krona One';
   font-style: normal;

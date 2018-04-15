@@ -30,10 +30,9 @@ class validation{
     public function isAlpha($string){
         return (ctype_alpha($string));
     }
+
+    public function isEmail($email){
+        return (filter_var($email, $this->filter['email']));
+    }
 }//end of validation class
 
-$test = new validation();
-if($test->isString("goo1"))
-    echo "good";
-else
-    echo "bad";
