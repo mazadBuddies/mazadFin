@@ -9,7 +9,7 @@ function changeFormTitle(name){
         $('#names').append(userName);
         $('#pass').append(comPassword);
         $('.re').append(gender);
-        //$('.re').append(image);
+        $('.re').append(image);
         $('.rePassword').append('<script src="js/main.js">');
         $('.firstName').addClass('animated bounceInLeft');
         $('.lastName').addClass('animated bounceInRight');
@@ -47,9 +47,9 @@ var names =
                     '</div>'+
                     '<div class="row name-1">'+
                         '<div class="phone col-12">'+
-                            '<label for="phoneNumber" class="col-12">Phone</label>'+
+                            '<label for="phoneNumber" class="col-12">Credit Card</label>'+
                             '<div class="border">'+
-                                '<input type="tel" class="col-12" name="phoneNumber" placeholder="0-111-1111-111"/>'+
+                                '<input type="text" class="col-12" name="creditCard" placeholder="15 Number"/>'+
                             '</div>'+
                         '</div>'+
                     '</div>';

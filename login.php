@@ -35,18 +35,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                    <div class="userName col-12">
-                        <label for="userName" class="col-12">Image</label>
-                            <div class="border">
-                                <input type="file" class="col-12" name="images"  placeholder="eg. mr.robot" id="images"/>
-                            </div>
-                    </div>
-                '</div>
                     <div class="sup">
                         <input type="submit" id="submit1" value = "Sign in"/>
                     </div>
-
                 </form>
             </div>
         </div>

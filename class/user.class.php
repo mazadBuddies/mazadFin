@@ -43,16 +43,10 @@ class user{
     }//end of function
 
     public function signUp(){
-        echo "<pre>";
-        print_r($_POST);
-        echo "</pre>";
+        
         $connect = new dataBase(HOST, DB_NAME, DB_USER, DB_PASS);
         $connect->setTable('user');
         $time		= date('Y-m-d H:i:s');
-/*
-    [phoneNumber] => 123
-    [comPassword] => 1234
- */
         $insertColArrayName = array(
                             'firstName',
                             'lastName', 
