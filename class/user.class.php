@@ -216,7 +216,7 @@ class user{
 
 
 
-    if ($_SERVER['REQUEST_METHOD']== 'POST'){
+    if ($_SERVER['REQUEST_METHOD']== 'POST' && isset($_POST['ACTION'])){
         if ($_POST['ACTION'] == 'Edit'){
             $connect = new dataBase(HOST , DB_NAME , DB_USER , DB_PASS);
              $connect->setTable("user");
