@@ -1,10 +1,9 @@
 <?php
-    $activeSessionId = 4;
+    $activeSessionId = 1;
     $_SESSION['sessionId'] = $activeSessionId;
     $masterSession = new session();
     $masterSession->getSessionById($activeSessionId);
     $offerTableData = $masterSession->getOffersBySesionId($activeSessionId);
-    //$masterSession->getNewOffers(123344);
 ?>
 <section class="dashboard session-all col-11">
     <div class="container-fluid">

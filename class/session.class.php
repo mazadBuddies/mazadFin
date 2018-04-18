@@ -226,28 +226,32 @@ class session{
 			$sessDataAsView = array();
 			 $connect = new dataBase(HOST , DB_NAME , DB_USER , DB_PASS);
              $connect->setTable("session");
-             $sessData=$connect->select('sessionName, startPrice, startTime, sessionOwnerId, productId, id');
+             $sessData=$connect->select('startTime,sessionName, startPrice, startTime, sessionOwnerId, productId, id,description');
              if(sizeof($sessData)>0){
-             	for($i = 0 ;$i<sizeof($sessData);$i++){
+             	for($i=(sizeof($sessData)-1);$i>=0;$i--){
              		$connect->setTable("user");
              		$userInfo = $connect->select("firstName, imagePath", array('id'), array($sessData[$i]['sessionOwnerId']));
              		$connect->setTable("product");
-             		$prouductInfo = $connect->select('imagePath', array('id'), array($sessData[$i]['productId']));
+             		$productInfo = $connect->select('imagePath', array('id'), array($sessData[$i]['productId']));
+
              		$connect->setTable("sessionEnters");
              		$sessionEntersCount = sizeof($connect->select('id', array('sessionId'), array($sessData[$i]['id'])));
-
+             		
              		$sessDataAsRow = array("sessionName" => $sessData[$i]['sessionName'],
              								"startPrice" => $sessData[$i]['startPrice'],
              								"firstName" =>  $userInfo[0]['firstName'],
              								"imagePath" =>  $userInfo[0]['imagePath'],
-             								"productImage" => $prouductInfo[0]['imagePath'],
-             								"sessionEnters" => $sessionEntersCount 
+             								"productImage" => $productInfo[0]['imagePath'],
+             								"sessionEnters" => $sessionEntersCount ,
+             								"startTime" => $sessData[$i]['startPrice'],
+             								"description" => $sessData[$i]['description']
              							); 
              		$sessDataAsView[] = $sessDataAsRow;
              	}
              }
              return $sessDataAsView;
 	}
+	// : Division by zero in on line : Undefined variable: followingUserInfo in on line : Undefined variable: followingUserInfo in on line 
 }//end of class session
 
 if($_SERVER['REQUEST_METHOD'] === "POST"){

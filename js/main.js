@@ -374,8 +374,10 @@ $("div.session-panel").on("mouseleave", function(){
     $(this).children(".enter").animate({display:"none", opacity: "0"});
     $(this).children(".bottom-panel").animate({bottom:"-68px"});
 });
+var imageDir = "uploads/sessionFiles/";
 $("div.session-panel").each(function(){
-    $(this).css({"backgroundImage": "url('"+$(this).data("img") +"')"});
+    var imgDir = imageDir + $(this).data("img");
+    $(this).css({"backgroundImage": "url("+imgDir+")"});
     console.log($(this).data("img"));
 });
 

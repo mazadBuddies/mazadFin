@@ -174,10 +174,10 @@ class user{
      public function getPowerSession( $id ){
         $connect = new dataBase (HOST , DB_NAME , DB_USER , DB_PASS);
         $connect->setTable('session');
-        $sessionWin= $connect->select('*' , array('currentUser' , 'finished') , array($id , 1));
+        $sessionWin= sizeof($connect->select('*' , array('currentUser' , 'finished') , array($id , 1)));
         $connect->setTable('sessionenters');
-        $enterSession = $connect->select('*' , array('userId') , array($id));
-         return (sizeof($sessionWin)/sizeof($enterSession))*100;
+        $enterSession = sizeof($connect->select('*' , array('userId') , array($id)));
+        return ($sessionWin == 0 || $enterSession == 0)?0:(sizeof($sessionWin)/sizeof($enterSession))*100;
 
     }
 
@@ -186,7 +186,7 @@ class user{
          $connect->setTable('follow');
          $follow=$connect->select('*' , array('fromId') , array($id));
          $connect->setTable('user');
-         $follwingUserInfo = array();
+         $followingUserInfo = array();
          for ($i=0; $i < sizeof($follow) ; $i++) { 
             $UserInfo=$connect->select('firstName, imagePath, id', array('id'), array($follow[$i]['toId']));
             $arrayInfo= array("firstName"=> $UserInfo[0]['firstName'] , "id"=> $UserInfo[0]['id'], "imagePath"=> $UserInfo[0]['imagePath']);
