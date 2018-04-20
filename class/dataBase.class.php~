@@ -358,7 +358,7 @@
                     FOREIGN KEY (fromId) REFERENCES user(id),
                     FOREIGN KEY (sessionId) REFERENCES session(id)
                 );';
-                $Make[] = 'CREATE TABLE wallet(
+                $Make = 'CREATE TABLE wallet(
                     id int(11) AUTO_INCREMENT  PRIMARY KEY,
                     walletName varchar(255) NOT NULL,
                     realBalance int(11) NOT NULL,

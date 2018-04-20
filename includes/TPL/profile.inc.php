@@ -1,11 +1,9 @@
-
 <?php
     $masterUser = new user ();
     $IdData = $masterUser->getUserInfoById($_SESSION['id']);
     $PS = $masterUser->getPowerSession($_SESSION['id']);
     $following = $masterUser->getFollwing($_SESSION['id']);
     $follower = $masterUser->getFollower($_SESSION['id']);
-
 ?>
 <section class="profile col-11">
         <div class="container-fluid">
@@ -44,7 +42,6 @@
                                 <tr>
                                     <th>Email</th>
                                     <th><?php 
-
                                     echo $IdData[0]['email'];
                                 
                                     ?>
@@ -230,7 +227,7 @@
                                 <th>Date</th>
                                 <th>Details</th>
                             </tr>
-
+    
                             <tr>
                                 <th>
                                     <div class="cir">
@@ -260,5 +257,4 @@
                     </div><!--end of div.tbl-->
                 </div>
         </div><!-- end of div container-fluid-->
-    </section><!-- end of section profile-->
-
+</section><!-- end of section profile-->

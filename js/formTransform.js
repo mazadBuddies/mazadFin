@@ -37,9 +37,8 @@ function setActiveForm(){
     }else if(getCookie("sign") === 'in'){
         changeFormTitle('Sign In');
     }
-    console.log(getCookie("sign"));
 }
-
+changeFormTitle('Sign In');
 setActiveForm();
 var names = 
     '<div class="row name-1">' + 

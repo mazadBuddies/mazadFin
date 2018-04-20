@@ -1,10 +1,15 @@
-
 <?php
 $masterSession = new session();
 $sessionData = $masterSession->getAllSessions();
+if(sizeof($sessionData)==0){
+echo "<pre>";
+echo "There is no sessions right now";
+echo "</pre>";    
+}
+else{
 echo "<pre>";
 print_r($sessionData);
-echo "</pre>";
+echo "</pre>";}
 ?>
 <section class="dashboard col-11">
     <div class="container-fluid">
@@ -31,11 +36,9 @@ echo "</pre>";
                                             <span>TILL OUTCOME</span>
                                         </span>
                                     </div>
-
-                                    <div class="details">
-                                        A hot-shot race-car named Lightning McQueen gets waylaid in Radiator Springs
-                                    </div>
-
+                                    <div class="details">';
+                                    echo $sessionData[$i]['description']; 
+                                    echo '</div>
                                     <div class="userInfo">
                                         <div class="cir">
                                             <img src="';
@@ -46,29 +49,30 @@ echo "</pre>";
                                             echo $sessionData[$i]['firstName'];
                                         echo '</div>
                                     </div>
-
                                     <div class="enter">
                                         <div class="cir">
                                             <i class="fa fa-angle-right"></i>
                                         </div>
                                     </div>
-
                                     <div class="bottom-panel">
                                         <div class="money">
                                             <i class="fas fa-money-bill-alt"></i>
                                             <span class="number">';
-                                            echo $sessionData[$i]['sessionEnters'];
+                                             echo $sessionData[$i]['startPrice'];
                                             echo'<sup>EGP</sup>
                                             </span>
                                         </div>
                                         <div class="users">
                                             <i class="fas fa-users"></i>
                                             <span class="number">';
-                                            echo $sessionData[$i]['startPrice'];
+                                            echo $sessionData[$i]['sessionEnters'];
                                             echo'</span>
                                         </div>
                                     </div>
                                 </div>';
+                            if(sizeof($sessionData)==$i+1&&$sessionData%2==1){
+                                break;
+                            }
                             if($i < sizeof($sessionData)){
                                 echo '<div class="session-panel col-5" data-img="';
                                 echo $sessionData[$i+1]['productImage'];
@@ -82,11 +86,11 @@ echo "</pre>";
                                             <span>TILL OUTCOME</span>
                                         </span>
                                     </div>
-
-                                    <div class="details">
-                                        A hot-shot race-car named Lightning McQueen gets waylaid in Radiator Springs
-                                    </div>
-
+                                    <div class="details">';
+                                    echo $sessionData[$i+1]['description']; 
+                                    
+                                    echo 
+                                    '</div>
                                     <div class="userInfo">
                                         <div class="cir">
                                             <img src="';
@@ -97,25 +101,24 @@ echo "</pre>";
                                             echo $sessionData[$i+1]['firstName'];
                                         echo '</div>
                                     </div>
-
                                     <div class="enter">
                                         <div class="cir">
                                             <i class="fa fa-angle-right"></i>
                                         </div>
                                     </div>
-
                                     <div class="bottom-panel">
                                         <div class="money">
                                             <i class="fas fa-money-bill-alt"></i>
                                             <span class="number">';
-                                            echo $sessionData[$i+1]['sessionEnters'];
+                                            echo $sessionData[$i+1]['startPrice'];
+                                            
                                             echo'<sup>EGP</sup>
                                             </span>
                                         </div>
                                         <div class="users">
                                             <i class="fas fa-users"></i>
                                             <span class="number">';
-                                            echo $sessionData[$i+1]['startPrice'];
+                                            echo $sessionData[$i+1]['sessionEnters'];
                                             echo'</span>
                                         </div>
                                     </div>

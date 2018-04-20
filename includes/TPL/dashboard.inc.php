@@ -1,5 +1,6 @@
 <?php
-    $activeSessionId = 2;
+
+    $activeSessionId = isset($_GET['id'])?$_GET['id']:2;
     $_SESSION['sessionId']  = $activeSessionId;
     $masterSession          = new session();
     $sessionData            = $masterSession->getSessionById($activeSessionId);
@@ -31,8 +32,8 @@
                                     echo '
                                         <tr>
                                             <th class="offfer">';
-                                    echo $offerTableData[$i]['offer'];
-                                    echo'<sup>EGP</sup>
+                                                echo $offerTableData[$i]['offer'];
+                                                echo'<sup>EGP</sup>
                                             </th>
                                             <th>
                                                 <div class="cir">
@@ -42,10 +43,10 @@
                                                 </div>
                                             </th>
                                             <th>';
-                                            echo $offerTableData[$i]['name'];
-                                            echo '</th>
+                                                echo $offerTableData[$i]['name'];
+                                                echo '</th>
                                             <th>';
-                                            echo $offerTableData[$i]['time'];
+                                                echo $offerTableData[$i]['time'];
                                             echo'</th>
                                         </tr>';
                                 }
