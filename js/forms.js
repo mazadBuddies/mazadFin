@@ -1,4 +1,4 @@
-d$('div.border').append("<div class='bor'></div>");
+$('div.border').append("<div class='bor'></div>");
 $('div.menu-header').append("<div class='ponn'></div>");
 if($('div.add-icon').children('input').data('show') === true){
     $('div.add-icon').append('<i class="fa fa-eye show"></i>');}
