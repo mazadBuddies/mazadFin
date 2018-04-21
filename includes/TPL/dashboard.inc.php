@@ -1,5 +1,5 @@
 <?php
-    $activeSessionId = 4;
+    $activeSessionId = 13;
     $_SESSION['sessionId'] = $activeSessionId;
     $masterSession = new session();
     $masterSession->getSessionById($activeSessionId);
