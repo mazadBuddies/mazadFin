@@ -1,4 +1,5 @@
 <?php
+/* 6260 */
     setcookie('dir', 'dashboard', time() + (86400 * 30));
     include "config/directors.config.php";
     include ROOT_APP . "init.php";
