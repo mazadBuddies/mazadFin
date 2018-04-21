@@ -503,11 +503,10 @@ $("div.session-panel").on("mouseleave", function () {
         bottom: "-68px"
     });
 });
+var imageDir = "uploads/sessionFiles/"; 
 $("div.session-panel").each(function () {
-    $(this).css({
-        "backgroundImage": "url('" + $(this).data("img") + "')"
-    });
-    console.log($(this).data("img"));
+    var imgDir = imageDir + $(this).data("img");
+    $(this).css({"backgroundImage": "url("+imgDir+")"});
 });
 
 var newDate = new Date();
