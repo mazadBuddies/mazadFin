@@ -133,7 +133,6 @@ class session{
 	}
 
 	public function insertOffer(){
-		
 		$dataInfo = array();
 		$userId 	= $_SESSION['id'];
 		$offer		= $_POST['offer'];
@@ -148,13 +147,30 @@ class session{
 		if($connectToDatabase->getMaxValueByColumnName("offer",array("sessionId"), array($_SESSION['sessionId']))[0][0] >= $offer){
 			$errorReportingOfOffer[] = "This Offer Less than Current Offer";
 		}//end of if
+		//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+		if(!$this->checkIncreamentValue($offer)){
+			$errorReportingOfOffer[] = "This Offer Less than increament value";
+		}
+		if(!$this->checkWallet($offer)){
+			$errorReportingOfOffer[] = "This Offer Less than your money";
+		}
+		if(!$this->limitationOfBalance($offer)){
+			$errorReportingOfOffer[] = "your balance is not enough";
+		}
+		if($this->isHighOffer()){
+			$errorReportingOfOffer[] = "You already Top offer";
+		}
+		//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 		//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 		if(sizeof($errorReportingOfOffer) == 0){
+			$this->changeActiveBalanceForTwoUsers($offer);
+			$this->setCurrentOfferAndCurrentUser($offer);
 			$connectToDatabase->insert($this->insertOfferArray, array($offer, $userId, $_SESSION['sessionId'], $time));
+			return json_encode(array());
 		}//end of if
-
-		return json_encode($errorReportingOfOffer);
-		
+		else{
+			return json_encode($errorReportingOfOffer);
+		}
 		/*
 		$connectToDatabase->setTable('user');
 		$userInfo 	= $connectToDatabase->select('firstName, imagePath', array('id'), array($userId));
@@ -252,7 +268,6 @@ class session{
              		$userInfo = $connect->select("firstName, imagePath", array('id'), array($sessData[$i]['sessionOwnerId']));
              		$connect->setTable("product");
              		$productInfo = $connect->select('imagePath', array('id'), array($sessData[$i]['productId']));
-
              		$connect->setTable("sessionEnters");
              		$sessionEntersCount = sizeof($connect->select('id', array('sessionId'), array($sessData[$i]['id'])));
              		
@@ -266,13 +281,85 @@ class session{
              								"description" => $sessData[$i]['description']
              							); 
             		$sessDataAsView[] = $sessDataAsRow;
-             	}
-             }
-             return $sessDataAsView;
+            	}
+            }
+            return $sessDataAsView;
 	}
-	// : Division by zero in on line : Undefined variable: followingUserInfo in on line : Undefined variable: followingUserInfo in on line 
+	public function checkIncreamentValue($newOffer){
+		$bigOffer = -1;
+		$connectToDatabase	= new dataBase(HOST, DB_NAME, DB_USER, DB_PASS);
+		$connectToDatabase->setTable('sessionOffers');
+		$allOffers = $connectToDatabase->getMaxValueByColumnName("offer", array("sessionId"), array($_SESSION['sessionId']));
+		if((int)sizeof($allOffers) > 0){
+			$bigOffer = $allOffers[0]['max'];
+		}else{
+			$connectToDatabase->setTable('session');
+			$allOffers = $connectToDatabase->select("startPrice", array("id"), array($_SESSION['sessionId']));
+			$bigOffer = intval($allOffers[0]['startPrice']);
+		}
+		$connectToDatabase->setTable('session');
+		$sessionIncreament = $connectToDatabase->select("increamentValue", array("id"), array($_SESSION['sessionId']))[0]['increamentValue'];
+		$newOfferCheck = $bigOffer * ($sessionIncreament / 100);
+		return (($newOffer - $bigOffer) >= $newOfferCheck)?true:false;
+	}//end of function
 
+	public function checkWallet($Offer){
+		$connectToDatabase = new dataBase(HOST, DB_NAME, DB_USER, DB_PASS);
+		$connectToDatabase->setTable('wallet');
+		$myWallet = $connectToDatabase->select('realBalance, activeBalance', array('ownerId'), array($_SESSION['id']));
+		//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx
+		if(sizeof($myWallet)){
+			$money= $myWallet[0]['realBalance'] - $myWallet[0]['activeBalance'];
+			return ($Offer <= $money)?true:false;
+		}
+		//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxx
+	}//end of function checkWallet
+	
+	public function limitationOfBalance($offer){
+		$connectToDatabase = new dataBase(HOST, DB_NAME, DB_USER, DB_PASS);
+		$connectToDatabase->setTable('wallet');
+		$sessionData = $connectToDatabase->select('realBalance, activeBalance', array('ownerId'), array($_SESSION['id']));
+		//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxx
+		if(sizeof($sessionData)){
+			$isBig = $sessionData[0]['activeBalance'] + $offer;
+			return ($sessionData[0]['realBalance'] >= $isBig)?true:false;
+		}
+		//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxx
+	}
+
+	public function changeActiveBalanceForTwoUsers($offer){
+		$connectToDatabase = new dataBase(HOST, DB_NAME, DB_USER, DB_PASS);
+		$connectToDatabase->setTable('sessionOffers');
+		$sessionOffers = $connectToDatabase->select("*", array('sessionId'),array($_SESSION['sessionId']));
+		if((int)sizeof($sessionOffers) > 0){
+			$connectToDatabase->setTable('session');
+			$maxUserOfferInfo = $connectToDatabase->select("currentOffer, currentUser", array("id"), array($_SESSION['sessionId']));
+			$connectToDatabase->setTable('wallet');
+			$activeBalanceForPrevUser = $connectToDatabase->select("activeBalance", array('ownerId'),array($maxUserOfferInfo[0]['currentUser']));
+			$minusOfferFromPreviousUser = $activeBalanceForPrevUser[0]['activeBalance'] - $maxUserOfferInfo[0]['currentOffer'];
+			$connectToDatabase->update(array('activeBalance'), array($minusOfferFromPreviousUser), array('ownerId'), array($maxUserOfferInfo[0]['currentUser']));
+			$activeBalanceForNewOffer = $connectToDatabase->select("activeBalance", array('ownerId'), array($_SESSION['id']));
+			$newActiveBalanceForNewOffer = $offer + $activeBalanceForNewOffer[0]['activeBalance'];
+			$connectToDatabase->update(array('activeBalance'), array($newActiveBalanceForNewOffer), array('ownerId'), array($_SESSION['id']));
+		}//END OF IF
+	}//END OF FUCNTION changeActiveBalanceForTwoUsers
+
+	public function setCurrentOfferAndCurrentUser($offer){
+		$connectToDatabase = new dataBase(HOST, DB_NAME, DB_USER, DB_PASS);
+		$connectToDatabase->setTable('session');
+		$connectToDatabase->update(array("currentUser", "currentOffer"), array($_SESSION['id'], $offer), array("id"), array($_SESSION['sessionId']));
+	}//end of function
+
+	public function isHighOffer(){
+		$connectToDatabase = new dataBase(HOST, DB_NAME, DB_USER, DB_PASS);
+		$connectToDatabase->setTable('session');
+		$sessionData = $connectToDatabase->select("currentUser", array("id"), array($_SESSION['sessionId']));
+		return ($sessionData[0]['currentUser'] == $_SESSION['id'])?true:false;
+	}
 }//end of class session
+
+
+
 
 if($_SERVER['REQUEST_METHOD'] === "POST"){
 
