@@ -1,0 +1,14 @@
+ajax docs
+---------
+
+class ===> ajax  --> put this class when send data only
+        OR ajax_file and put this if upload photo
+        AND click | submit -->  and any from this to make action
+data-
+     url        => direction of script "from HTML file" and user ../ not APP_DIR
+     method     => method of request (get-post)
+     accept     => your return value of you wait it if action done
+     action     => this for which block of code you would like to execute it and you can access it from $_POST['YOUR_ACTIOn']
+     values     => if you went to send data for server put with this from
+                    key1=>value1|key2=>value2|key3=>value3......
+    function    => if you write function and would to execute it when event added suc.

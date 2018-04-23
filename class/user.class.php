@@ -179,29 +179,33 @@ class user{
     public function getFollwing($id){
         $connect = new dataBase (HOST , DB_NAME , DB_USER , DB_PASS);
         $connect->setTable('follow');
-        $follow=$connect->select('*' , array('fromId') , array($id));
+        $follow = $connect->select('*' , array('fromId') , array($id));
         $connect->setTable('user');
         $follwingUserInfo = array();
-        for ($i=0; $i < sizeof($follow) ; $i++) { 
-        $UserInfo=$connect->select('firstName, imagePath, id', array('id'), array($follow[$i]['toId']));
-        $arrayInfo= array("firstName"=> $UserInfo[0]['firstName'] , "id"=> $UserInfo[0]['id'], "imagePath"=> $UserInfo[0]['imagePath']);
-        $followingUserInfo[] = $arrayInfo;
+        if(sizeof($follow) > 0){
+            for ($i=0; $i < sizeof($follow) ; $i++) { 
+                $UserInfo = $connect->select('firstName, imagePath, id', array('id'), array($follow[$i]['toId']));
+                $arrayInfo = array("firstName"=> $UserInfo[0]['firstName'] , "id"=> $UserInfo[0]['id'], "imagePath"=> $UserInfo[0]['imagePath']);
+                $follwingUserInfo[] = $arrayInfo;
+            }
         }
-        return $followingUserInfo ;
+        return $follwingUserInfo ;
     }
 
     public function getFollower($id){
         $connect = new dataBase (HOST , DB_NAME , DB_USER , DB_PASS);
         $connect->setTable('follow');
-         $follow=$connect->select('*' , array('toId') , array($id));
+        $follow = $connect->select('*' , array('toId') , array($id));
         $connect->setTable('user');
         $follwingUserInfo = array();
-        for ($i=0; $i < sizeof($follow) ; $i++) { 
-            $UserInfo=$connect->select('firstName, imagePath, id', array('id'), array($follow[$i]['fromId']));
-            $arrayInfo= array("firstName"=> $UserInfo[0]['firstName'] , "id"=> $UserInfo[0]['id'], "imagePath"=> $UserInfo[0]['imagePath']);
-            $followingUserInfo[] = $arrayInfo;
+        if(sizeof($follow) > 0){
+            for ($i=0; $i < sizeof($follow) ; $i++) { 
+                $UserInfo=$connect->select('firstName, imagePath, id', array('id'), array($follow[$i]['fromId']));
+                $arrayInfo= array("firstName"=> $UserInfo[0]['firstName'] , "id"=> $UserInfo[0]['id'], "imagePath"=> $UserInfo[0]['imagePath']);
+                $follwingUserInfo[] = $arrayInfo;
+            }
         }
-        return $followingUserInfo ;
+        return $follwingUserInfo ;
     }//end of function
 }//end of class
 

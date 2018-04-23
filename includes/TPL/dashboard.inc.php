@@ -1,6 +1,6 @@
 <?php
 
-    $activeSessionId = isset($_GET['id'])?$_GET['id']:13;
+    $activeSessionId = isset($_GET['id'])?$_GET['id']:1;
     $_SESSION['sessionId']  = $activeSessionId;
     $masterSession          = new session();
     $sessionData            = $masterSession->getSessionById($activeSessionId);

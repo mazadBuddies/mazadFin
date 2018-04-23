@@ -225,6 +225,7 @@
         public function mk(){
                 $Make = array();
                 if($this->isDatabase('mazad'))$Make[] = 'DROP DATABASE mazad';
+
                 $Make[] = 'CREATE DATABASE mazad';
                 $Make[] = 'USE mazad';
                 $Make[] = 'CREATE TABLE user (
@@ -280,6 +281,7 @@
                                 currentUser int(11),
                                 finished TINYINT(2) DEFAULT 0,
                                 increamentValue int(11) DEFAULT 3,
+                                description VARCHAR(255),
                                 FOREIGN KEY (sessionOwnerId) REFERENCES user(id),
                                 FOREIGN KEY (currentUser) REFERENCES user(id))';
 
