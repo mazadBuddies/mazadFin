@@ -1,8 +1,8 @@
 <?php
-    $activeSessionId = 2;
+    $activeSessionId = 13;
     $_SESSION['sessionId'] = $activeSessionId;
     $masterSession = new session();
-    $sessionData = $masterSession->getSessionById($activeSessionId);
+    $masterSession->getSessionById($activeSessionId);
     $offerTableData = $masterSession->getOffersBySesionId($activeSessionId);
     //$masterSession->getNewOffers(123344);
 ?>
@@ -14,9 +14,7 @@
             <div class="time"> 00:00:00</div>
             <div class="blind"></div>
         </div><!--end of sessionTitles-->
-<?php
-    print_r($sessionData);
-?>
+        
         <div class="sessionConnect">
             <div class="row">
                 <div class="sessionOffers col-7">
@@ -34,8 +32,8 @@
                                     echo '
                                         <tr>
                                             <th class="offfer">';
-                                    echo $offerTableData[$i]['offer'];
-                                    echo'<sup>EGP</sup>
+                                                echo $offerTableData[$i]['offer'];
+                                                echo'<sup>EGP</sup>
                                             </th>
                                             <th>
                                                 <div class="cir">
@@ -45,10 +43,10 @@
                                                 </div>
                                             </th>
                                             <th>';
-                                            echo $offerTableData[$i]['name'];
-                                            echo '</th>
+                                                echo $offerTableData[$i]['name'];
+                                                echo '</th>
                                             <th>';
-                                            echo $offerTableData[$i]['time'];
+                                                echo $offerTableData[$i]['time'];
                                             echo'</th>
                                         </tr>';
                                 }
@@ -63,7 +61,6 @@
                                 <button class="myBtn ajax click addNewOffer"  data-url="class/session.class.php" data-action="INSERT_OFFER" data-accept="0" data-method="POST" data-values="" data-function="1"/>Offer</button>
                         </div>
                         <div class="errors">
-                            
                         </div>
                     </div>
                 </div><!--end of sessionOffers-->
@@ -124,7 +121,6 @@
             ?>
         </div><!--end of cir-->
         <div class="preview">
-            
         </div><!--end of preview-->
     </div><!--end of container-->
 </section>
