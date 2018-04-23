@@ -1,10 +1,19 @@
 <?php
+<<<<<<< HEAD
 
     $activeSessionId = isset($_GET['id'])?$_GET['id']:1;
     $_SESSION['sessionId']  = $activeSessionId;
     $masterSession          = new session();
     $sessionData            = $masterSession->getSessionById($activeSessionId);
     $offerTableData         = $masterSession->getOffersBySesionId($activeSessionId);
+=======
+    $activeSessionId = 13;
+    $_SESSION['sessionId'] = $activeSessionId;
+    $masterSession = new session();
+    $masterSession->getSessionById($activeSessionId);
+    $offerTableData = $masterSession->getOffersBySesionId($activeSessionId);
+    //$masterSession->getNewOffers(123344);
+>>>>>>> master
 ?>
 
 <section class="dashboard session-all col-11">
