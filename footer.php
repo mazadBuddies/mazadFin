@@ -19,3 +19,15 @@
 <script src=<?php echo "'" . JS_DIR . "main.js" . "'";?> ></script>
 <script src=<?php echo "'" . JS_DIR . "changeDir.js" . "'";?> ></script>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+

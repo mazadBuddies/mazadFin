@@ -115,7 +115,7 @@
                         </th>
                     </tr>
                 </table>
-                <button class="add">Add New</button>
+                <button class="add makeOverLay" data-content="2">Add New</button>
             </div><!-- end of div manage-cats-->
 
             <div class="manage-cats">

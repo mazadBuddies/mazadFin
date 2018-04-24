@@ -1,8 +1,9 @@
-
 <?php
     $masterUser = new user ();
     $IdData = $masterUser->getUserInfoById($_SESSION['id']);
-
+    $PS = $masterUser->getPowerSession($_SESSION['id']);
+    $following = $masterUser->getFollwing($_SESSION['id']);
+    $follower = $masterUser->getFollower($_SESSION['id']);
 ?>
 <section class="profile col-11">
         <div class="container-fluid">
@@ -41,7 +42,6 @@
                                 <tr>
                                     <th>Email</th>
                                     <th><?php 
-
                                     echo $IdData[0]['email'];
                                 
                                     ?>
@@ -107,7 +107,9 @@
                     <div class="content row">
                         <div class="left col-6">
                             <p>My ₽ower</p>
-                            <span>0.00%</span>
+                            <span><?php 
+                            echo $PS.'%';
+                            ?></span>
                         </div><!-- end of div left-->
                         <div class="right col-6">
                             <div class="cir">    
@@ -191,7 +193,9 @@
                             <span class="outter">Following</span>
                             <div class="cir f1" data-open = "false">
                                 <span class="number" data-open="followPup">
-                                    17
+                                   <?php
+                                  echo sizeof($following);
+                                  ?>
                                 </span><!-- end of div span-->    
                             </div>
                         </div><!-- end of div col-6-->
@@ -199,7 +203,9 @@
                             <span class="outter">Followers</span>
                             <div class="cir f2" data-open = "false">
                                 <span class="number" data-open="followerPup">
-                                    189
+                                    <?php
+                                   echo sizeof($follower);
+                                   ?>
                                 </span><!-- end of div span-->    
                             </div>
                         </div><!-- end of div col-6-->
@@ -251,5 +257,4 @@
                     </div><!--end of div.tbl-->
                 </div>
         </div><!-- end of div container-fluid-->
-    </section><!-- end of section profile-->
-
+</section><!-- end of section profile-->
