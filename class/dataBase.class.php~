@@ -225,7 +225,6 @@
         public function mk(){
                 $Make = array();
                 if($this->isDatabase('mazad'))$Make[] = 'DROP DATABASE mazad';
-
                 $Make[] = 'CREATE DATABASE mazad';
                 $Make[] = 'USE mazad';
                 $Make[] = 'CREATE TABLE user (
@@ -280,8 +279,8 @@
                                 currentOffer int(11) DEFAULT 0,
                                 currentUser int(11),
                                 finished TINYINT(2) DEFAULT 0,
+                                description varchar(255) DEFAULT "test test",
                                 increamentValue int(11) DEFAULT 3,
-                                description VARCHAR(255),
                                 FOREIGN KEY (sessionOwnerId) REFERENCES user(id),
                                 FOREIGN KEY (currentUser) REFERENCES user(id))';
 
@@ -360,7 +359,7 @@
                     FOREIGN KEY (fromId) REFERENCES user(id),
                     FOREIGN KEY (sessionId) REFERENCES session(id)
                 );';
-                $Make[] = 'CREATE TABLE wallet(
+                $Make = 'CREATE TABLE wallet(
                     id int(11) AUTO_INCREMENT  PRIMARY KEY,
                     walletName varchar(255) NOT NULL,
                     realBalance int(11) NOT NULL,

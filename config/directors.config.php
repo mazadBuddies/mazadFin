@@ -24,7 +24,7 @@ test test test
 
 
 
-$mashKind = "windows";// linux
+$mashKind = "linux";// linux
 ini_set('display_errors', 1);//this for show errs
 error_reporting(~0);// the same target
 $dirAsString = "";
@@ -32,7 +32,7 @@ $sep = ($mashKind == "windows")?'\\':'/';
 $dataBasePassword = ($mashKind == "windows")?"":"1234A";
 define("SEP", $sep); // to set our separator
 $explodedDirs = explode(SEP, __DIR__);
-for($i=0;$i<999;$i++){
+for($i=0;$i<10;$i++){
     $dirAsString.= $explodedDirs[$i] . SEP;
     if($explodedDirs[$i] == 'mazad')break;
 }
