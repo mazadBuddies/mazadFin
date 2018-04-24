@@ -414,7 +414,6 @@ $(".makeOverLay").on("click", function () {
         });
     });
 });
-
 $(".exit-icon").on("click", function () {
     "use strict";
     trigger = false;
