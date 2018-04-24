@@ -211,8 +211,74 @@ class user{
 
     }
 
-    
+    public function getAge($id){
+        $connect = new dataBase(HOST , DB_NAME , DB_USER , DB_PASS);
+        $connect->setTable('user');
+        $Age = $connect->select('*' , array('birthDate') , array($id));
+        
     }
+
+    public function getRate($id){
+        $connect = new dataBase(HOST , DB_NAME , DB_USER , DB_PASS);
+        $connect->setTable('user');
+        $ratte = $connect->select('*' , array('rate') , array($id));
+        
+    }
+
+    public function generateRank($Rank){
+       if($Rank <= 200){
+        return "Class J";
+       }
+       elseif ($Rank > 200 && $Rank <= 399) {
+           return "Class I";
+       }
+       elseif ($Rank >=400 && $Rank <= 599) {
+           return "Class H";
+       }
+       elseif ($Rank >=600  && $Rank <= 799) {
+           return "Class G";
+       }
+       elseif ($Rank >=800 && $Rank <= 999) {
+           return "Class F";
+       }
+       elseif ($Rank >= 1000 && $Rank <= 1199) {
+           return "Class E";
+       }
+       elseif ($Rank >=1200 && $Rank <= 1399) {
+           return "Class D";
+       }
+       elseif ($Rank >= 1400 && $Rank <= 1599) {
+           return "Class C";
+       }
+       elseif ($Rank >= 1600 && $Rank <= 1799) {
+           return "Class B";
+       }
+       elseif ($Rank > 1800 && $Rank <= 1999) {
+           return "Class A";
+       }
+       elseif ($Rank >=2000 && $Rank <= 2199) {
+           return "Expert";
+       }
+       elseif ($Rank > 2200) {
+           return "Class National Master";
+       }
+       elseif ($Rank >2400) {
+           return "Class Senior Master";
+       }
+    }
+
+    public function getLastVisit($id){
+        $connect = new dataBase(HOST , DB_NAME , DB_USER , DB_PASS);
+        $connect->setTable('user');
+        $ratte = $connect->select('*' , array('lastVisit') , array($id));
+    }
+    public function getRegistered($id){
+        $connect = new dataBase(HOST , DB_NAME , DB_USER , DB_PASS);
+        $connect->setTable('user');
+        $ratte = $connect->select('*' , array('RegisterDate') , array($id));
+    }
+   
+    }//end of class
 
 
 

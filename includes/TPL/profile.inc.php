@@ -4,7 +4,9 @@
     $IdData = $masterUser->getUserInfoById($_SESSION['id']);
     $PS = $masterUser->getPowerSession($_SESSION['id']);
     $following = $masterUser->getFollwing($_SESSION['id']);
-    $follower = $masterUser->getFollower($_SESSION['id']);
+    $follower = $masterUser->getFollower($_SESSION['id']);  
+    $CalAge = $masterUser->getAge($_SESSION['id']);
+
 
 ?>
 <section class="profile col-11">
@@ -63,25 +65,35 @@
                                 </tr>
                                 <tr>
                                     <th>Age</th>
-                                    <th></th>
+                                    <th><?php 
+                                      echo $masterUser->getAge($CalAge[0]['birthDate']);
+                                    ?></th>
                                 </tr>
                         </table>
                         <table class="col-6">
                             <tr>
                                 <th>RANK</th>
-                                <th> Candidate Master </th>
+                                <th> <?php 
+                                   echo $masterUser->generateRank($IdData[0]['rate']);
+                                ?> </th>
                             </tr>
                             <tr>
                                 <th>RATE</th>
-                                <th>190</th>
+                                <th><?php
+                                     echo $IdData[0]['rate'];
+                                ?></th>
                             </tr>
                             <tr>
                                 <th>Registered</th>
-                                <th>18 months ago</th>
+                                <th><?php 
+                                  echo $IdData[0]['RegisterDate'];
+                                ?></th>
                             </tr>
                             <tr>
                                 <th>Last visit</th>
-                                <th>20 min</th>
+                                <th><?php
+                                    echo $IdData[0]['lastVisit'];
+                                ?></th>
                             </tr>
                     </table>
                     </div>

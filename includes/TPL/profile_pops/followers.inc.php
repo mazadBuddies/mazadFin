@@ -1,5 +1,3 @@
-
-
 <div class="followSec followerPup closeDbl">
     <i class="far fa-times-circle exit-icon closeP"></i>
     <div class="row panel">
