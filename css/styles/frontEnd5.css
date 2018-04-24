@@ -40,6 +40,13 @@ a {
 .display-none {
   display: none; }
 
+.txt-area {
+  width: 100%;
+  max-width: 100%;
+  height: 99%;
+  max-height: 150%;
+  margin-bottom: 0px; }
+
 .name-2 {
   width: 96%; }
 

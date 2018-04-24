@@ -370,14 +370,24 @@ $('#get').on("click", function(){
 
 var trigger = false;
 var myIncudeScripts = [
-    "includes/TPL/pops/editProfile.pop.php", "includes/TPL/makeSession.php"
+    "includes/TPL/pops/editProfile.pop.php",
+    "includes/TPL/makeSession.php",
+    "includes/TPL/pops/addCategorie.pop.php"
 ];
+
+function setScrollTop(scroll){
+    "use strict";
+    var currentScroll = $(window).scrollTop();
+    $(window).scrollTop(scroll);
+    return currentScroll;
+}
+var currentScroll = 0;
 // start of make overlay fadeToggle
 $(".makeOverLay").on("click", function () {
     "use strict";
+    currentScroll = setScrollTop(0);
     trigger = true;
     var indexedLoadeContentFromArray = $(this).data('content');
-    //$("body").css({"overflow-y":"hidden"});
     $(window).on("scroll", function () {
         "use strict";
         if ($(window).scrollTop() > 450 && trigger == true)
@@ -397,18 +407,14 @@ $(".makeOverLay").on("click", function () {
             "opacity": "1"
         }, 1000);
         $.get(myIncudeScripts[indexedLoadeContentFromArray], function (data, status) {
+            $(".edit").html("");
+            //alert(data);
             $(".edit").append(data);
             $(".edit").append("<script src='js/forms.js'></script>");
         });
-        /*$.ajax({
-            url:myIncudeScripts[indexedLoadeContentFromArray],
-            dataType:"html",
-            success: function(data){
-                alert(data);
-            }
-        });*/
     });
 });
+
 $(".exit-icon").on("click", function () {
     "use strict";
     trigger = false;

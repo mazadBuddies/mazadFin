@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php
 $masterSession = new session();
 $sessionData = $masterSession->getAllSessions();
@@ -7,11 +6,12 @@ echo "<pre>";
 echo "There is no sessions right now";
 echo "</pre>";    
 }
+/*
 else{
 echo "<pre>";
 print_r($sessionData);
-echo "</pre>";}
-
+echo "</pre>";
+}*/
 ?>
 <section class="dashboard col-11">
     <div class="container-fluid">
