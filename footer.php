@@ -14,7 +14,7 @@
 <script src=<?php echo "'" . JS_DIR . "niceScroll.js" . "'";?> ></script>
 <script src=<?php echo "'" . JS_DIR . "jquery.nicescroll.iframehelper.min.js" . "'";?> ></script>
 <script src=<?php echo "'" . JS_DIR . "jquery.nicescroll.min.js" . "'";?> ></script>
-<script src=<?php echo "'" . JS_DIR . "sessionValidation.js" . "'";?> ></script>
+<!-- <script src=<?php echo "'" . JS_DIR . "sessionValidation.js" . "'";?> ></script> -->
 <script src=<?php echo "'" . JS_DIR . "formTransform.js" . "'";?> ></script>
 <script src=<?php echo "'" . JS_DIR . "main.js" . "'";?> ></script>
 <script src=<?php echo "'" . JS_DIR . "changeDir.js" . "'";?> ></script>
