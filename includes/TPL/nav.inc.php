@@ -1,6 +1,5 @@
 <nav class="nav-bar">
     <div class="container-fluid">
-
         <div class="row">
             <div class="brand col-6">
                 <div class="row">
@@ -15,7 +14,6 @@
                     </span>
                 </div>
             </div>
-
             <div class="availble-bounce col-3">
                 <div>   
                     <span class="bold">
@@ -28,7 +26,6 @@
                     </span>
                 </div>
             </div>
-
             <div class="col-3">
                 <div class="row">
                     <div class="newSession col-1">
@@ -36,13 +33,11 @@
                             <i class="fa fa-coffee makeOverLay" data-content="1"></i>
                         </div>
                     </div>
-
                     <div class="info row col-7">
                         <div class="name">
                             <?php echo $_SESSION['firstName'];?>
                         </div>
                     </div>
-
                     <div class="col-2 info">
                         <div class="cir" id="openProfile">
                             <img src= <?php 
@@ -51,25 +46,20 @@
                             ?> alt="">
                         </div>
                         <i class="fa fa-angle-down blur ll"></i>
-
                         <div class="drop-down">
                             <ul>
                                 <li>
                                     <i class="far fa-smile"></i>
                                     help
                                 </li>
-                                
                                 <li>
-                                    
                                     <a href="logout.php" class="logOut"><i class="fas fa-power-off"></i> logout</a>
                                 </li>
-                                
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
-            
         </div>
     </div>
 </nav>

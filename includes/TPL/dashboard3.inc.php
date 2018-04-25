@@ -19,14 +19,14 @@ echo "</pre>";
         <div class="noti-suc">
             <i class="far fa-thumbs-up"></i>
             <span>
-            noti-suc
+                noti-suc
             </span>
-    </div>
+        </div>
         <div class="session col-10">
             <?php
                 for($i = 0; $i<sizeof($sessionData); $i+=2){
                     echo '<div class="row session-row">
-                                <div class="session-panel col-5" data-img="';
+                                <div class="session-panel col-lg-5 col-md-10" data-img="';
                                 echo $sessionData[$i]['productImage'];
                                 echo '">
                                     <div class="time">
@@ -60,7 +60,7 @@ echo "</pre>";
                                         <div class="money">
                                             <i class="fas fa-money-bill-alt"></i>
                                             <span class="number">';
-                                             echo $sessionData[$i]['startPrice'];
+                                            echo $sessionData[$i]['startPrice'];
                                             echo'<sup>EGP</sup>
                                             </span>
                                         </div>

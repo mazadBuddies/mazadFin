@@ -120,7 +120,7 @@ class user{
         $this->lastName  = $_SESSION['lastName'];
         $this->email     = $_SESSION['email'];
         $this->imgPath   = $_SESSION['imagePath'];
-        $this->password  = $_SESSION['password'];
+        $exthis->password  = $_SESSION['password'];
         $this->userName  = $_SESSION['userName'];
         $this->gender    = $_SESSION['gender'];
         $this->userRole  = $_SESSION['userRole'];

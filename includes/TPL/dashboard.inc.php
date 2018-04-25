@@ -1,5 +1,5 @@
 <?php
-    $activeSessionId = 13;
+    $activeSessionId = 1;
     $_SESSION['sessionId'] = $activeSessionId;
     $masterSession = new session();
     $masterSession->getSessionById($activeSessionId);
@@ -14,7 +14,7 @@
             <div class="time"> 00:00:00</div>
             <div class="blind"></div>
         </div><!--end of sessionTitles-->
-        
+        masterUser
         <div class="sessionConnect">
             <div class="row">
                 <div class="sessionOffers col-7">

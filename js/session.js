@@ -29,7 +29,6 @@ function mkOfferValue(){
     $('button.myBtn.ajax').data('values'," ");
     values = "|"+"offer=>"+String(pressPlusToAddLastValue());
     $('button.myBtn.ajax').data('values', values);
-
 }// end of function mkOfferValue
 
 var lastMessageTime = $('#lastMessageTime').data('max');

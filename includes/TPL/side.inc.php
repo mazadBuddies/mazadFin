@@ -19,9 +19,13 @@
                 <i class="far fa-user-circle"></i>
                 <span>Account</span>
             </li>
-            <li data-on="true">
-                <i class="fas fa-assistive-listening-systems"></i>
-                <span>Make Session</span>
+            <li data-on="true" data-dir = "chattingRoom" class="chat">
+                <i class="far fa-comment"></i>
+                <span>Chatting Room</span>
+            </li>
+            <li data-on="true" data-dir = "notification" class="notification">
+                <i class="fas fa-bomb"></i>
+                <span>Notifications</span>
             </li>
             <li class="chng" data-on="false">
                 <i class="fas fa-paint-brush"></i>

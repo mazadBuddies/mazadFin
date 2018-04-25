@@ -198,7 +198,7 @@
                     return true;
             }
             return false;
-        }//end of function isDatabase
+        }//end of function isDatabase 
         public function getLastId(){
             $this->curQuery = "SELECT  MAX(id) AS max FROM $this->curTable";
             return $this->executeQuery(false, true);

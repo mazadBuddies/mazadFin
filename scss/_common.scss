@@ -31,6 +31,9 @@ and open the template in the editor.
 @import "_comp/_session.scss";
 @import "_libs/_overlayLoader.scss";
 @import "_comp/_sessionInfo.scss";
+@import "_comp/_chat.scss";
+@import "_comp/_notification.scss";
+@import "_comp/_magic.scss";
 *{
     margin: 0px;
     padding: 0px;

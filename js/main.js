@@ -141,7 +141,6 @@ function changeLink() {
             "opacity": "0"
         }));
         var arrayLinks = ['', '', ''];
-        /***************************************************************************/
         $("section." + $(this).data("dir")).css({
             "display": "block"
         }).animate({
@@ -185,6 +184,31 @@ function OpenAdmin() {
     }));
     $("aside.left-side ul li.admin").addClass("active").siblings().removeClass("active");
     $("section." + $("aside.left-side ul li.admin").data("dir")).css({
+        "display": "block"
+    }).animate({
+        "opacity": "1"
+    });
+}
+
+function OpenChat(){
+    $("section.content").children().css(({
+        "display": "none",
+        "opacity": "0"
+    }));
+    $("aside.left-side ul li.chat").addClass("active").siblings().removeClass("active");
+    $("section." + $("aside.left-side ul li.chat").data("dir")).css({
+        "display": "block"
+    }).animate({
+        "opacity": "1"
+    });
+}
+function OpenNoti(){
+    $("section.content").children().css(({
+        "display": "none",
+        "opacity": "0"
+    }));
+    $("aside.left-side ul li.notification").addClass("active").siblings().removeClass("active");
+    $("section." + $("aside.left-side ul li.notification").data("dir")).css({
         "display": "block"
     }).animate({
         "opacity": "1"
@@ -254,6 +278,14 @@ $(document).on("keydown", function (e) {
     if (e.shiftKey && e.which == 65) {
         OpenAdmin();
         setCookie("dire", "admin-panel", 1);
+    }
+    if(e.shiftKey && e.which == 67){
+        OpenChat();
+        setCookie("dire", "chattingRoom", 1);
+    }
+    if(e.shiftKey && e.which == 66){
+        OpenNoti();
+        setCookie("dire", "chattingRoom", 1);
     }
     //console.log(e.which);
 });
@@ -546,8 +578,8 @@ function niceScroll(eve) {
 }
 
 
-//niceScroll(".scroll");
-//niceScroll(".messages");
+niceScroll(".scroll");
+niceScroll(".messages");
 
 //hdkjashkja
 function temp() {

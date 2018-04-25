@@ -137,6 +137,7 @@ class session{
 		$userId 	= $_SESSION['id'];
 		$offer		= $_POST['offer'];
 		$time		= date('Y-m-d h:m:s');
+		//if($offer);
 		$connectToDatabase = new dataBase(HOST, DB_NAME, DB_USER, DB_PASS);
 		$connectToDatabase->setTable('sessionOffers');
 		$errorReportingOfOffer = array();
@@ -259,27 +260,27 @@ class session{
 
 	public function getAllSessions(){
 			$sessDataAsView = array();
-		 	$connect = new dataBase(HOST , DB_NAME , DB_USER , DB_PASS);
-         	$connect->setTable("session");
-         	$sessData=$connect->select('startTime,sessionName, startPrice, startTime, sessionOwnerId, productId, id,description');
-         	if(sizeof($sessData)>0){
-             	for($i=(sizeof($sessData)-1);$i>=0;$i--){
-             		$connect->setTable("user");
-             		$userInfo = $connect->select("firstName, imagePath", array('id'), array($sessData[$i]['sessionOwnerId']));
-             		$connect->setTable("product");
-             		$productInfo = $connect->select('imagePath', array('id'), array($sessData[$i]['productId']));
-             		$connect->setTable("sessionEnters");
-             		$sessionEntersCount = sizeof($connect->select('id', array('sessionId'), array($sessData[$i]['id'])));
-             		
-             		$sessDataAsRow = array("sessionName" => $sessData[$i]['sessionName'],
-             								"startPrice" => $sessData[$i]['startPrice'],
-             								"firstName" =>  $userInfo[0]['firstName'],
-             								"imagePath" =>  $userInfo[0]['imagePath'],
-             								"productImage" => $productInfo[0]['imagePath'],
-             								"sessionEnters" => $sessionEntersCount ,
-             								"startTime" => $sessData[$i]['startPrice'],
-             								"description" => $sessData[$i]['description']
-             							); 
+			$connect = new dataBase(HOST , DB_NAME , DB_USER , DB_PASS);
+			$connect->setTable("session");
+			$sessData=$connect->select('startTime,sessionName, startPrice, startTime, sessionOwnerId, productId, id,description');
+			if(sizeof($sessData)>0){
+				for($i=(sizeof($sessData)-1);$i>=0;$i--){
+					$connect->setTable("user");
+					$userInfo = $connect->select("firstName, imagePath", array('id'), array($sessData[$i]['sessionOwnerId']));
+					$connect->setTable("product");
+					$productInfo = $connect->select('imagePath', array('id'), array($sessData[$i]['productId']));
+					$connect->setTable("sessionEnters");
+					$sessionEntersCount = sizeof($connect->select('id', array('sessionId'), array($sessData[$i]['id'])));
+					
+					$sessDataAsRow = array("sessionName" => $sessData[$i]['sessionName'],
+											"startPrice" => $sessData[$i]['startPrice'],
+											"firstName" =>  $userInfo[0]['firstName'],
+											"imagePath" =>  $userInfo[0]['imagePath'],
+											"productImage" => $productInfo[0]['imagePath'],
+											"sessionEnters" => $sessionEntersCount ,
+											"startTime" => $sessData[$i]['startPrice'],
+											"description" => $sessData[$i]['description']
+										); 
             		$sessDataAsView[] = $sessDataAsRow;
             	}
             }

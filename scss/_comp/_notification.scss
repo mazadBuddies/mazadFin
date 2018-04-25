@@ -1,0 +1,37 @@
+section.notification{
+    color:#fff;
+    ul{
+        li.fir{
+            background-color: $sec-color;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            @include box-shadow(0px 0px 10px #000);
+            div.cir{
+                @include cir(60px);
+                overflow: hidden;
+                img{
+                    width: 60px;
+                    height: 60px;
+                }
+            }
+            div.name{
+                text-align: left;
+                font-size: $font-lg;
+            }
+            div.noti-msg{
+                padding-top: 10px;
+                font-size: $font-lg;
+            }
+            div.noti-info{
+                ul li{
+                    padding: 3px;
+                    border-radius: 4px;
+                    text-align: center;
+                    margin-bottom: 3px;
+                }
+            }
+        }
+    }
+    
+}
