@@ -19,6 +19,13 @@
             $db->setTable("session"); 
             $db->delete(array('id'), array($_POST['id']));
         }
+        elseif($_POST['ACTION'] == 'BLOCK_SESSION'){
+            $db->setTable("session"); 
+            $c = $db->select('sessionOwnerId', array('id'), array($_POST['id']), true)[0]['sessionOwnerId'];
+            $db->delete(array('id'), array($_POST['id']));
+            $db->setTable("user");
+            $db->update(array("blocked"), array(1), array("id"),array($c));
+        }
         elseif($_POST['ACTION'] == 'ADD_CATEGORY'){
             $db->setTable("categorie"); 
             $db->insert("(icon, categorieName, details)", "(".$_POST['categorieIcon'].','.$_POST['categorieName'].','.$_POST['categorieDetails'].")");

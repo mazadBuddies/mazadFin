@@ -220,8 +220,11 @@
                                 <?php echo($productData[$allData[$i]['productId']-1]['productName']); ?>
                             </th>
                             <th>
-                                <button>Block</button>
-                                <?php $s = $allData[$i]['id']; echo("<button id='session$s' class='danger ajax click' data-url='./class/adminPanel.class.php' data-action='DELETE_SESSION' data-method='POST' data-values='id=>$s' data-function='5'>Delete</button>");  ?>
+                                <?php
+                                    $s = $allData[$i]['id'];
+                                    echo("<button id='session$s' class='danger ajax click' data-url='./class/adminPanel.class.php' data-action='BLOCK_SESSION' data-method='POST' data-values='id=>$s' data-function='5'>Block</button>");  
+                                    echo("<button id='session$s' class='danger ajax click' data-url='./class/adminPanel.class.php' data-action='DELETE_SESSION' data-method='POST' data-values='id=>$s' data-function='5'>Delete</button>");  
+                                    ?>
                             </th>
                         </tr>
                         <?php } ?>
