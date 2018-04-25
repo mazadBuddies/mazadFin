@@ -254,6 +254,7 @@
                         }
                         
                         function deleteCategory(id){
+                            console.log(id);
                             var x = document.getElementById('category'+id);
                             x.parentElement.parentElement.remove();
                         }
