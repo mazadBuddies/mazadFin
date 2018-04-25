@@ -3,14 +3,7 @@
     $IdData = $masterUser->getUserInfoById($_SESSION['id']);
     $PS = $masterUser->getPowerSession($_SESSION['id']);
     $following = $masterUser->getFollwing($_SESSION['id']);
-<<<<<<< HEAD
-    $follower = $masterUser->getFollower($_SESSION['id']);  
-    $CalAge = $masterUser->getAge($_SESSION['id']);
-
-
-=======
     $follower = $masterUser->getFollower($_SESSION['id']);
->>>>>>> bfe1660b8e6e4555f2e9888c8d6ece3ba685f414
 ?>
 <section class="profile col-11">
         <div class="container-fluid">
@@ -42,23 +35,20 @@
                         </div>
                     </div>
                     <span class="name"><?php
-                             echo $IdData[0]['firstName'] ." ". $IdData[0]['lastName'];
+                            echo $IdData[0]['firstName'] ." ". $IdData[0]['lastName'];
                         ?></span>
                     <div class="row">
                         <table class="col-6">
                                 <tr>
                                     <th>Email</th>
                                     <th><?php 
-                                    echo $IdData[0]['email'];
-                                
-                                    ?>
-                                        
+                                    echo $IdData[0]['email'];?>
                                     </th>
                                 </tr>
                                 <tr>
                                     <th>User name</th>
                                     <th><?php
-                                           echo $IdData[0]['userName'];
+                                        echo $IdData[0]['userName'];
                                     ?></th>
                                 </tr>
                                 <tr>
@@ -68,7 +58,8 @@
                                 <tr>
                                     <th>Age</th>
                                     <th><?php 
-                                      echo $masterUser->getAge($CalAge[0]['birthDate']);
+                                    echo "20 ";
+                                        //echo $masterUser->getAge($CalAge[0]['birthDate']);
                                     ?></th>
                                 </tr>
                         </table>
@@ -76,19 +67,19 @@
                             <tr>
                                 <th>RANK</th>
                                 <th> <?php 
-                                   echo $masterUser->generateRank($IdData[0]['rate']);
+                                    echo $masterUser->generateRank($IdData[0]['rate']);
                                 ?> </th>
                             </tr>
                             <tr>
                                 <th>RATE</th>
                                 <th><?php
-                                     echo $IdData[0]['rate'];
+                                    echo $IdData[0]['rate'];
                                 ?></th>
                             </tr>
                             <tr>
                                 <th>Registered</th>
                                 <th><?php 
-                                  echo $IdData[0]['RegisterDate'];
+                                    echo $IdData[0]['RegisterDate'];
                                 ?></th>
                             </tr>
                             <tr>
@@ -220,9 +211,9 @@
                             <span class="outter">Followers</span>
                             <div class="cir f2" data-open = "false">
                                 <span class="number" data-open="followerPup">
-                                    <?php
-                                   echo sizeof($follower);
-                                   ?>
+                                <?php
+                                    echo sizeof($follower);
+                                ?>
                                 </span><!-- end of div span-->    
                             </div>
                         </div><!-- end of div col-6-->
