@@ -206,10 +206,10 @@ function ajaxFileSubmit(e){
     });// end of accept action function
 }// end of function
 function defaultAjaxFunction(data){
-    //alert(data);
+    alert(data);
     return 0;
 }
-var ajaxSuccessFunctions = [defaultAjaxFunction ,addedNewOfferSuc]; // this array for ajax success functions
+var ajaxSuccessFunctions = [defaultAjaxFunction ,addedNewOfferSuc, activateButton, deactivateButton, deleteCategory, deleteSession, clearReport]; // this array for ajax success functions
 
 function ajaxSubmit(e){
     e.preventDefault();
@@ -219,7 +219,7 @@ function ajaxSubmit(e){
     var accept   = String($(this).data('accept'));
     var action   = $(this).data('action');
     var functionIndex = 0;
-    mkOfferValue();
+    //mkOfferValue();
     if($(this).data('values') != undefined){
         var dataAsString = $(this).data('values');
         var splitedArrayOfDataValue = dataAsString.split('|');
@@ -245,8 +245,8 @@ function ajaxSubmit(e){
         processData: false,
         success: ajaxSuccessFunctions[functionIndex],
         error: function(data){
-            console.log("error");
-            alert(data);
+            alert("error");
+            console.log(data);
         }
     });
 }

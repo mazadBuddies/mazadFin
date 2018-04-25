@@ -11,4 +11,12 @@ data-
      action     => this for which block of code you would like to execute it and you can access it from $_POST['YOUR_ACTIOn']
      values     => if you went to send data for server put with this from
                     key1=>value1|key2=>value2|key3=>value3......
+<<<<<<< HEAD
     function    => if you write function and would to execute it when event added suc,.
+=======
+<<<<<<< HEAD
+    function    => if you write function and would to execute it when event added suc,.
+=======
+    function    => if you write function and would to execute it when event added suc.
+>>>>>>> c1599f3363275b61a3c2ce903d6fdaa445ee73a8
+>>>>>>> 31918311fa8ae36f8dd36f325901aba657e96491

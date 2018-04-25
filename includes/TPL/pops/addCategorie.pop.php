@@ -13,14 +13,22 @@
                     <label for="firstName" class="col-12">Categorie Name</label>
                     <input name="ACTION" value="Edit" type="hidden">
                     <div class="border">
+<<<<<<< HEAD
                         <input type="text" name="firstName" class="col-12"/>
+=======
+                        <input type="text" name="categorieName" class="col-12"/>
+>>>>>>> 31918311fa8ae36f8dd36f325901aba657e96491
                     </div>
                 </div>
 
                 <div class="lastName col-2">
                     <label for="lastName" class="col-12">Icon</label>
                     <div class="border">
+<<<<<<< HEAD
                         <input type="text" name="lastName" class="col-12"/>
+=======
+                        <input type="text" name="categorieIcon" class="col-12"/>
+>>>>>>> 31918311fa8ae36f8dd36f325901aba657e96491
                     </div>
                 </div>
             </div>
@@ -29,12 +37,17 @@
                 <div class="userName col-12">
                     <label for="userName" class="col-12">Description</label>
                     <div class="border">
+<<<<<<< HEAD
                         <textarea class="txt-area" name="desc"></textarea>
+=======
+                        <textarea class="txt-area" name="categorieDetails"></textarea>
+>>>>>>> 31918311fa8ae36f8dd36f325901aba657e96491
                     </div>
                 </div>
             </div>
 
             <div class="sup">
+<<<<<<< HEAD
                 <input type="submit" value = "ADD Categorie"/>
             </div>
         </form>
@@ -43,6 +56,41 @@
         * By Editing your Info , you agree to changing your Profile Info. 
     </p>
 </div>
+=======
+                <input type="submit" value = "ADD Categorie" class='ajax click' data-url='./class/adminPanel.class.php' data-action='ADD_CATEGORY' data-method='POST' data-function='6'/>
+            </div>
+        </form>
+    </div>
+</div>
+<script
+    function removeCategoryPopUp(){
+        "use strict";
+        trigger = false;
+        $(".edit").animate({
+            "opacity": "0"
+        }, 300, function () {
+            $(".exit-icon").animate({
+                "opacity": "0"
+            }, 100, function () {
+                $(".overlay").animate({
+                    "opacity": "0"
+                }, 1000, function () {
+                    $("body").css({
+                        "overflow-y": "auto"
+                    });
+                    $(".overlay").css({
+                        "display": "none"
+                    });
+                    $(".exit-icon").css({
+                        "display": "none"
+                    });
+                    $(".edit").empty();
+                }); 
+            });
+        });
+    }
+></script>
+>>>>>>> 31918311fa8ae36f8dd36f325901aba657e96491
 <script src="../../../js/jquery.min.js"></script>
 <script src="../../../js/forms.js"></script>
 <script src="../../../js/main.js"></script>

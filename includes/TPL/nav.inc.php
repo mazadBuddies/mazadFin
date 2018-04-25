@@ -1,5 +1,6 @@
 <nav class="nav-bar">
     <div class="container-fluid">
+
         <div class="row">
             <div class="brand col-6">
                 <div class="row">
