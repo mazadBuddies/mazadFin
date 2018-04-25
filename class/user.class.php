@@ -177,7 +177,6 @@ class user{
     }//end of fucntion getPowerSession
 
     public function getFollwing($id){
-<<<<<<< HEAD
          $connect = new dataBase (HOST , DB_NAME , DB_USER , DB_PASS);
          $connect->setTable('follow');
          $follow=$connect->select('*' , array('fromId') , array($id));
