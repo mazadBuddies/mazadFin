@@ -2,4 +2,3 @@ Problems:
 	1-Can't re-use same ajax functions for some reason.. (Block/Unlock)
 	2-Edit/Add Category: can't send form details to server
 	3-Can't delete first row of categories. "Cannot delete or update a parent row: a foreign key constraint fails"
-	4-No edit account button?!
