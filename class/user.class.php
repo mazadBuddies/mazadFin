@@ -31,7 +31,8 @@ class user{
         $this->connect->setTable('user');
     }
     public function logIn($email, $password){
-        
+        $connect = new dataBase(HOST, DB_NAME, DB_USER, DB_PASS);
+        $connect->setTable('user');
         $password = sha1($password);
         $allData = $connect->select("*", array('email', 'userPassword'),array($email, $password));
         if(sizeof($allData) > 0){
