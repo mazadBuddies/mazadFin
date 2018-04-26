@@ -16,11 +16,11 @@
     </div>
 <?php 
     $master = new user();
-    include INCLUDES_DIR . "dashboard3.inc.php";
+    include INCLUDES_DIR . "dashboard.inc.php";
     if($master->getRole() == 1)// note that we use == not === "don't work in this case"
         include  INCLUDES_DIR ."adminPanel.inc.php";
     include     INCLUDES_DIR . "profile.inc.php";
-    //include     INCLUDES_DIR . "chat.inc.php";
+    include     INCLUDES_DIR . "chat.inc.php";
     include     INCLUDES_DIR . "notifications.inc.php";
 ?>
 </section><!-- end of section conent-->
