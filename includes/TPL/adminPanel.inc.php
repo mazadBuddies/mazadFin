@@ -102,7 +102,7 @@
                         <th>Details</th>
                         <th> controls</th>
                     </tr>
-                    <?php                            
+                    <?php
                     $db->setTable('categorie');
 
                     $allData = $db->select();
@@ -198,7 +198,7 @@
                             $tempDB->setTable('product');
                             $allData = $db->select();
                             $productData = $tempDB->select();
-                            for($i = 0; $i<sizeof($allData);$i++){
+                            for($i = sizeof($allData)-1; $i>=0;$i--){
                         ?>
                         <tr>
                             <th>

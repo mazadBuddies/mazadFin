@@ -543,6 +543,7 @@ $("div.session-panel").on("mouseleave", function () {
         bottom: "-68px"
     });
 });
+
 var imageDir = "uploads/sessionFiles/"; 
 $("div.session-panel").each(function () {
     var imgDir = imageDir + $(this).data("img");
@@ -576,7 +577,6 @@ function niceScroll(eve) {
         scrollspeed: 130, // scrolling speed
         mousescrollstep: 40 // scrolling speed with mouse wheel (pixel)
     });
-
 }
 
 

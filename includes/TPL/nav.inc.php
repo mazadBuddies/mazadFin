@@ -41,14 +41,15 @@
                         </div>
                     </div>
                     <div class="info row col-7">
-                        <div class="name">
-                            <?php echo $_SESSION['firstName'];?>
+                        <div class="name firstName2">
+                            <?php 
+                            $master = new user();
+                            echo $master->getFirstName();?>
                         </div>
                     </div>
                     <div class="col-2 info">
                         <div class="cir" id="openProfile">
                             <img src= <?php 
-                            $master = new user();
                             $master->getImgPath();
                             ?> alt="">
                         </div>

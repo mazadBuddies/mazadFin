@@ -5,6 +5,14 @@
  *          this file contains main user functions               *
  *****************************************************************
 */
+if(!isset($_SESSION)){
+    session_start();
+}
+if(isset($_POST['ACTION'])){
+    include "../config/directors.config.php";
+    include "dataBase.class.php";
+}
+
 class user{
     private $firstName;
     private $lastName;
@@ -16,10 +24,14 @@ class user{
     private $imgPath;
     private $arrayOfData;
     private $imagePathRoot = ROOT_APP . 'imgs/';
-    
+    private $connect;
+    public function __construct()
+    {
+        $this->connect = new dataBase(HOST, DB_NAME, DB_USER, DB_PASS);
+        $this->connect->setTable('user');
+    }
     public function logIn($email, $password){
-        $connect = new dataBase(HOST, DB_NAME, DB_USER, DB_PASS);
-        $connect->setTable('user');
+        
         $password = sha1($password);
         $allData = $connect->select("*", array('email', 'userPassword'),array($email, $password));
         if(sizeof($allData) > 0){
@@ -40,7 +52,6 @@ class user{
             $_SESSION['user']->setData();
             header("location:index.php");
         }
-
     }//end of function
 
     public function signUp(){
@@ -147,7 +158,9 @@ class user{
     }
 
     public function getRole(){return $_SESSION['userRole'];}
-    public function getFirstName(){return $this->firstName;}
+    public function getFirstName(){
+        return $this->connect->select("firstName", array('id'), array($_SESSION['id']))[0][0];
+    }
     public function getLastName(){return $this->lastName;}
     public function setLastName($lastName){$this->lastName = $lastName;}
     public function getGender(){return $this->gender;}
@@ -209,20 +222,19 @@ class user{
         return $follwingUserInfo ;
     }//end of function
     public function getUserDataById($select, $id){
-        $connectToDatabase=new dataBase(HOST, DB_NAME, DB_USER, DB_PASS);
+        $connectToDatabase = new dataBase(HOST, DB_NAME, DB_USER, DB_PASS);
         $connectToDatabase->setTable ('user');
         return $connectToDatabase->select($select, array('id'), array($id));
+    }
+    public function updateInfo($id, $firstName, $lastName ,$userName){
+        $this->connect->update(array('firstName', 'lastName' , 'userName'), array($firstName , $lastName , $userName) ,array('id') , array($id));
+        return json_encode(array("firstName"=>$firstName, "lastName"=>$lastName,"userName"=>$userName));
     }
 }//end of class
 
 if ($_SERVER['REQUEST_METHOD']== 'POST' && isset($_POST['ACTION'])){
     if ($_POST['ACTION'] == 'Edit'){
-        $connect = new dataBase(HOST , DB_NAME , DB_USER , DB_PASS);
-        $connect->setTable("user");
-        $firstName = $_POST['firstName'];
-        $lastName = $_POST['lastName'];
-        $email= $_POST['email'];
-        $userName = $_POST['userName'];
-        $connect->update(array('firstName', 'lastName' , 'email' , 'userName'), array($firstName , $lastName , $email , $userName) ,array('id') , array($_POST['id']));
+        $masterUser = new user();
+        print_r($masterUser->updateInfo($_SESSION['id'], $_POST['firstName'], $_POST['lastName'], $_POST['userName']));
     }
 }

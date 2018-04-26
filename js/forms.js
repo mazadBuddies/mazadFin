@@ -162,7 +162,7 @@ function uploadeFile(fileId, fileName, urlDir, form_data, func){
             contentType:false,
             cache: false,
             processData: false,
-            success: func,
+            success: ajaxSuccessFunctions[9],
             error: function(data){
                 console.log("error");
                 console.log(data);
@@ -209,6 +209,19 @@ function defaultAjaxFunction(data){
     alert(data);
     return 0;
 }
+function editName(name){
+    $('span.fullName').text(name);
+}
+
+function editFirstName(name){
+    $('div.firstName2').text(name);
+}
+
+function editProfile(data){
+    var JSONInfo = JSON.parse(data);
+    editName(JSONInfo.firstName + " " +JSONInfo.lastName);
+    editFirstName(JSONInfo.firstName);
+}
 var ajaxSuccessFunctions = [defaultAjaxFunction ,
                             addedNewOfferSuc,
                             activateButton,
@@ -216,7 +229,8 @@ var ajaxSuccessFunctions = [defaultAjaxFunction ,
                             deleteCategory,
                             deleteSession,
                             clearReport,
-                            chngWalletValue//7
+                            chngWalletValue,
+                            editProfile
                         ]; // this array for ajax success functions
 
 function moneyFormat(money){
@@ -260,7 +274,6 @@ function ajaxSubmit(e){
     if($(this).data('function') != undefined){
         functionIndex = parseInt($(this).data('function'));
     }
-    
     $.ajax({
         url: url,
         method: method,

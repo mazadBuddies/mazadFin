@@ -38,7 +38,7 @@
                             <!--acive here-->
                         </div>
                     </div>
-                    <span class="name"><?php
+                    <span class="name fullName"><?php
                             echo $IdData[0]['firstName'] ." ". $IdData[0]['lastName'];
                         ?></span>
                     <div class="row">
@@ -47,9 +47,7 @@
                                     <th>Email</th>
                                     <th><?php 
                                     echo $IdData[0]['email'];
-                                
                                     ?>
-                                        
                                     </th>
                                 </tr>
                                 <tr>
