@@ -9,9 +9,11 @@
     ini_set('display_errors', 1);//this for show errs
 	error_reporting(~0);// the same target
 	if($_SERVER['REQUEST_METHOD'] === 'POST'){
-		session_start();
-		include "../config/directors.config.php";
+		require "../config/directors.config.php";
 		include CLASS_DIR . "autoLoader.class.php";
+	}
+	if(!isset($_SESSION['id'])){
+		session_start();
 	}
 	
 

@@ -98,6 +98,7 @@ function showNewOffers(data){
         onSuccess -> use **showNewOffers** SCRIPT_SELF
         @params:: no
     */
+    //alert(data);
     var newOffersAsJsonObiect = JSON.parse(data);
     var newOffersSize = newOffersAsJsonObiect.length;
     if(newOffersSize > 0){
@@ -157,7 +158,7 @@ function getNewOffers(){
 }//end of function
 
 function showNewMessages(data){
-    
+    //alert(data);
     var newMessagesAsJsonObject = JSON.parse(data);
     var newMessageLength = newMessagesAsJsonObject.length;
     if(newMessageLength > 0){

@@ -8,8 +8,8 @@
 if(!isset($_SESSION)){
     session_start();
 }
-if(isset($_POST['ACTION'])){
-    include "../config/directors.config.php";
+if(isset($_POST['ACTION']) && $_SERVER['REQUEST_METHOD'] == 'POST'){
+    //include "../config/directors.config.php";
     include "dataBase.class.php";
 }
 
