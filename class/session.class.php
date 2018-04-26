@@ -91,8 +91,9 @@ class session{
 	}//end of getSessionById
 
 	public function getSessionName(){
-		return $this->sessionData[0]['sessionName'];
+		return "test";
 	}// end of get sessionName
+	
 
 	public function getOffersBySesionId($sessionId){
 		$getSessionOffersByIdFromDatabase = new dataBase(HOST, DB_NAME, DB_USER, DB_PASS);
