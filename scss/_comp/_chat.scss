@@ -8,7 +8,7 @@ section.chattingRoom{
         margin-right: 8.3333333%;
         overflow: hidden;
         height: 85vh;
-        background-color: $sec-color;
+        //background-color: $sec-color;
         @import "_message.scss";
         div.messages{
             height: 76vh!important;
@@ -22,7 +22,7 @@ section.chattingRoom{
     div.chatOnline{
         div.friends{
             height: 83vh;
-            background-color: $sec-color;
+            //background-color: $sec-color;
             overflow-y: scroll;
             overflow-x: hidden;
             ul {

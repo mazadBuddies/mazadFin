@@ -169,7 +169,6 @@
             $targ = $tragS;// set passed array and set new values 
                 for($i = 0; $i < (int)sizeof($arrCols); $i++)
                     $targ[':' . $arrCols[$i]] = $arrVals[$i];// make array [key=>value]
-                    
             return $targ;
         }// end of mkInsertArray function
 

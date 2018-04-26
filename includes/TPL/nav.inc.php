@@ -21,7 +21,13 @@
                         Available Balance:
                     </span>
                     <span class="balance">
-                        <span>5.00</span>
+                        <span class="myBalance2">
+                            <?php
+                                $masterWallet = new wallet();
+                                $myWallet = $masterWallet->getWalletByUserId($_SESSION['id']);
+                                echo (sizeof($myWallet) > 0)?$myWallet[0]['realBalance']:'0';
+                            ?>
+                        </span>
                         <sup>EGP<i class="fa fa-dolar"></i></sup>
                         <i class="fa fa-angle-down sz rotate"></i>
                     </span>

@@ -535,6 +535,21 @@ section.profile {
     padding: 20px;
     margin-bottom: 30px;
     margin-right: 8.33333%; }
+    section.profile div.row2 div.wallet table {
+      width: 100%;
+      margin-bottom: 30px; }
+      section.profile div.row2 div.wallet table tr {
+        border-radius: 5px;
+        text-align: center;
+        background-color: rgba(11, 11, 11, 0.9);
+        box-shadow: 0px 0px 5px transparent;
+        margin-bottom: 30px !important; }
+      section.profile div.row2 div.wallet table tr.head {
+        color: #b2a9c1;
+        margin-bottom: 20px;
+        box-shadow: 0px 0px 0px transparent; }
+      section.profile div.row2 div.wallet table th {
+        color: #b2a9c1; }
     section.profile div.row2 div.wallet:hover {
       box-shadow: 0px 0px 50px transparent;
       -webkit-box-shadow: 0px 0px 50px transparent;
@@ -1828,8 +1843,7 @@ section.chattingRoom {
   section.chattingRoom div.chatMessage {
     margin-right: 8.3333333%;
     overflow: hidden;
-    height: 85vh;
-    background-color: #282828; }
+    height: 85vh; }
     section.chattingRoom div.chatMessage div.messages {
       margin: auto;
       overflow-y: scroll;
@@ -1904,7 +1918,6 @@ section.chattingRoom {
         width: 80% !important; }
   section.chattingRoom div.chatOnline div.friends {
     height: 83vh;
-    background-color: #282828;
     overflow-y: scroll;
     overflow-x: hidden; }
     section.chattingRoom div.chatOnline div.friends ul li {

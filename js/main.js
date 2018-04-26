@@ -115,11 +115,12 @@ $("div.following div.cir").on("mouseenter", function () {
     }
 });
 
-//start of make stars of feedback and rate
-var numOfStars = $("div.stars").data("rate") + 1;
-for (var i = 0; i < numOfStars; i++) {
-    $("div.stars").children("i." + i).removeClass("far").addClass("fas");
+$('div.stars').each(function(){
+    var numOfStars = $(this).data("rate")+1;
+for(var i = 0; i< numOfStars ; i++){
+    $(this).children("i." + i).removeClass("far").addClass("fas");
 }
+});
 
 // make fake ajax load content
 $("section.content").children().css(({
@@ -404,7 +405,8 @@ var trigger = false;
 var myIncudeScripts = [
     "includes/TPL/pops/editProfile.pop.php",
     "includes/TPL/makeSession.php",
-    "includes/TPL/pops/addCategorie.pop.php"
+    "includes/TPL/pops/addCategorie.pop.php",
+    "includes/TPL/pops/createWallet.pop.php"
 ];
 
 function setScrollTop(scroll){
@@ -595,3 +597,4 @@ function closeSessionPanel() {
 $('.open-sessionInfo').on("click", temp);
 $('.session-info').on("dblclick", closeSessionPanel);
 //temp();
+

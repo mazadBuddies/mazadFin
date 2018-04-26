@@ -209,8 +209,33 @@ function defaultAjaxFunction(data){
     alert(data);
     return 0;
 }
-var ajaxSuccessFunctions = [defaultAjaxFunction ,addedNewOfferSuc, activateButton, deactivateButton, deleteCategory, deleteSession, clearReport]; // this array for ajax success functions
+var ajaxSuccessFunctions = [defaultAjaxFunction ,
+                            addedNewOfferSuc,
+                            activateButton,
+                            deactivateButton, 
+                            deleteCategory,
+                            deleteSession,
+                            clearReport,
+                            chngWalletValue//7
+                        ]; // this array for ajax success functions
 
+function moneyFormat(money){
+    money = String(money);
+    var numberlength = money.length;
+    if(numberlength  => 7){return money.substr(0, numberlength-6) + "M";}
+    if(numberlength  <= 3){return money;}
+    if(numberlength  => 4 && numberlength <= 6){return money.substr(0, numberlength-3) + "K";}
+    
+    
+}
+
+
+function chngWalletValue(data){
+    "use strict";
+    $(".myBalance2").text(moneyFormat(data));
+    $(".myBalance").text(data);
+
+}
 function ajaxSubmit(e){
     e.preventDefault();
     var url      = $(this).data("url");

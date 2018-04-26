@@ -16,6 +16,7 @@ class user{
     private $imgPath;
     private $arrayOfData;
     private $imagePathRoot = ROOT_APP . 'imgs/';
+    
     public function logIn($email, $password){
         $connect = new dataBase(HOST, DB_NAME, DB_USER, DB_PASS);
         $connect->setTable('user');
@@ -207,6 +208,11 @@ class user{
         }
         return $follwingUserInfo ;
     }//end of function
+    public function getUserDataById($select, $id){
+        $connectToDatabase=new dataBase(HOST, DB_NAME, DB_USER, DB_PASS);
+        $connectToDatabase->setTable ('user');
+        return $connectToDatabase->select($select, array('id'), array($id));
+    }
 }//end of class
 
 if ($_SERVER['REQUEST_METHOD']== 'POST' && isset($_POST['ACTION'])){

@@ -3,7 +3,7 @@
     setcookie('dir', 'dashboard', time() + (86400 * 30));
     include "config/directors.config.php";
     include ROOT_APP . "init.php";
-    if(!isLogin())header("location:login.php");
+    if(!isLogin())header("location:mazadHome.php");
     include INCLUDES_DIR . "nav.inc.php";
     include INCLUDES_DIR . "side.inc.php";
     include COMP_INC_DIR . "magicButton.comp.php";
