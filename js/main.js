@@ -115,12 +115,11 @@ $("div.following div.cir").on("mouseenter", function () {
     }
 });
 
-$('div.stars').each(function(){
-    var numOfStars = $(this).data("rate")+1;
-for(var i = 0; i< numOfStars ; i++){
-    $(this).children("i." + i).removeClass("far").addClass("fas");
+//start of make stars of feedback and rate
+var numOfStars = $("div.stars").data("rate") + 1;
+for (var i = 0; i < numOfStars; i++) {
+    $("div.stars").children("i." + i).removeClass("far").addClass("fas");
 }
-});
 
 // make fake ajax load content
 $("section.content").children().css(({
@@ -142,6 +141,7 @@ function changeLink() {
             "opacity": "0"
         }));
         var arrayLinks = ['', '', ''];
+        /***************************************************************************/
         $("section." + $(this).data("dir")).css({
             "display": "block"
         }).animate({
@@ -185,31 +185,6 @@ function OpenAdmin() {
     }));
     $("aside.left-side ul li.admin").addClass("active").siblings().removeClass("active");
     $("section." + $("aside.left-side ul li.admin").data("dir")).css({
-        "display": "block"
-    }).animate({
-        "opacity": "1"
-    });
-}
-
-function OpenChat(){
-    $("section.content").children().css(({
-        "display": "none",
-        "opacity": "0"
-    }));
-    $("aside.left-side ul li.chat").addClass("active").siblings().removeClass("active");
-    $("section." + $("aside.left-side ul li.chat").data("dir")).css({
-        "display": "block"
-    }).animate({
-        "opacity": "1"
-    });
-}
-function OpenNoti(){
-    $("section.content").children().css(({
-        "display": "none",
-        "opacity": "0"
-    }));
-    $("aside.left-side ul li.notification").addClass("active").siblings().removeClass("active");
-    $("section." + $("aside.left-side ul li.notification").data("dir")).css({
         "display": "block"
     }).animate({
         "opacity": "1"
@@ -279,14 +254,6 @@ $(document).on("keydown", function (e) {
     if (e.shiftKey && e.which == 65) {
         OpenAdmin();
         setCookie("dire", "admin-panel", 1);
-    }
-    if(e.shiftKey && e.which == 67){
-        OpenChat();
-        setCookie("dire", "chattingRoom", 1);
-    }
-    if(e.shiftKey && e.which == 66){
-        OpenNoti();
-        setCookie("dire", "chattingRoom", 1);
     }
     //console.log(e.which);
 });
@@ -405,8 +372,7 @@ var trigger = false;
 var myIncudeScripts = [
     "includes/TPL/pops/editProfile.pop.php",
     "includes/TPL/makeSession.php",
-    "includes/TPL/pops/addCategorie.pop.php",
-    "includes/TPL/pops/createWallet.pop.php"
+    "includes/TPL/pops/addCategorie.pop.php"
 ];
 
 function setScrollTop(scroll){
@@ -448,7 +414,6 @@ $(".makeOverLay").on("click", function () {
         });
     });
 });
-
 $(".exit-icon").on("click", function () {
     "use strict";
     trigger = false;
@@ -543,7 +508,6 @@ $("div.session-panel").on("mouseleave", function () {
         bottom: "-68px"
     });
 });
-
 var imageDir = "uploads/sessionFiles/"; 
 $("div.session-panel").each(function () {
     var imgDir = imageDir + $(this).data("img");
@@ -577,11 +541,12 @@ function niceScroll(eve) {
         scrollspeed: 130, // scrolling speed
         mousescrollstep: 40 // scrolling speed with mouse wheel (pixel)
     });
+
 }
 
 
-niceScroll(".scroll");
-niceScroll(".messages");
+//niceScroll(".scroll");
+//niceScroll(".messages");
 
 //hdkjashkja
 function temp() {
@@ -597,4 +562,3 @@ function closeSessionPanel() {
 $('.open-sessionInfo').on("click", temp);
 $('.session-info').on("dblclick", closeSessionPanel);
 //temp();
-
