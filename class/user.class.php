@@ -90,9 +90,9 @@ class user{
             $validationErorrs["passwordEQ"] = "Your Confirmation password not equal password";
         }
 
-        echo "<pre>";
+        
         print_r($validationErorrs);
-        echo "</pre>";
+        
         /*$insertColArrayName = array(
                             'firstName',
                             'lastName', 
@@ -158,9 +158,14 @@ class user{
         header("location:login.php");
     }
 
-    public function getRole(){return $_SESSION['userRole'];}
+    public function getRole(){
+        if(!isset($_SESSION['id']))
+        return $_SESSION['userRole'];
+    }
     public function getFirstName(){
-        return $this->connect->select("firstName", array('id'), array($_SESSION['id']))[0][0];
+        $connect = new dataBase(HOST, DB_NAME, DB_USER, DB_PASS);
+        $connect->setTable('user');
+        return $connect->select("firstName", array('id'), array($_SESSION['id']))[0][0];
     }
     public function getLastName(){return $this->lastName;}
     public function setLastName($lastName){$this->lastName = $lastName;}

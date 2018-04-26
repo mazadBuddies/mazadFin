@@ -258,7 +258,7 @@ function ajaxSubmit(e){
     var accept   = String($(this).data('accept'));
     var action   = $(this).data('action');
     var functionIndex = 0;
-    //mkOfferValue();
+    mkOfferValue();
     if($(this).data('values') != undefined){
         var dataAsString = $(this).data('values');
         var splitedArrayOfDataValue = dataAsString.split('|');

@@ -49,7 +49,7 @@ function addedNewOfferSuc(data){
         ::TARGET:: show new data added in data base in active user
         @params:: **data** from ajax request
     */
-  // alert(data);
+//    /alert(data);
     $('div.setOffer .errors').html("");
     var offerErrorArray = JSON.parse(data);
     var errorReprotingLength = offerErrorArray.length;

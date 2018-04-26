@@ -1,5 +1,5 @@
 <?php
-    if(!isset($_SESSION['id'])){session_start();}
+    //if(!isset($_SESSION['id'])){session_start();}
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
         include "../config/directors.config.php";
         include CLASS_DIR . 'autoLoader.class.php';
@@ -7,18 +7,17 @@
 
     class wallet{
         private $tableName = 'wallet';
-        private $connect;
-        public function __construct(){
-            $this->connect = new dataBase(HOST, DB_NAME, DB_USER, DB_PASS);
-        }
         public function getWalletByUserId($id){
-            $this->connect->setTable($this->tableName);
-            return $this->connect->select('*', array('ownerId'), array($id));
+            $connect = new dataBase(HOST, DB_NAME, DB_USER, DB_PASS);
+            $connect->setTable($this->tableName);
+            return $connect->select('*', array('ownerId'), array($id));
         }
         public function creatWallet($walletName, $balance, $userId){
             $myWallets = $this->getWalletByUserId($userId);
             if(sizeof($myWallets)==0){
-                $this->connect->insert(
+                $connect = new dataBase(HOST, DB_NAME, DB_USER, DB_PASS);
+                $connect->setTable($this->tableName);
+                $connect->insert(
                 array('walletName', 'realBalance', 'ownerId'), 
                 array($walletName, $balance, $userId));
                 return $balance;

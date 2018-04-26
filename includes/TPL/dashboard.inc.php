@@ -1,5 +1,8 @@
 <?php
-    $activeSessionId = (isset($_GET['id']))?$_GET['id']:1;
+if(!isset($_SESSION)){
+    session_start();
+}
+    $activeSessionId = (isset($_GET['id']))? $_GET['id']:1;
     $_SESSION['sessionId'] = $activeSessionId;
     $masterSession = new session();
     $sessionData = $masterSession->getSessionById($activeSessionId);
