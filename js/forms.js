@@ -209,7 +209,7 @@ function defaultAjaxFunction(data){
     //alert(data);
     return 0;
 }
-var ajaxSuccessFunctions = [defaultAjaxFunction ,addedNewOfferSuc]; // this array for ajax success functions
+var ajaxSuccessFunctions = [defaultAjaxFunction ,addedNewOfferSuc, activateButton, deactivateButton, deleteCategory, deleteSession, clearReport]; // this array for ajax success functions
 
 function ajaxSubmit(e){
     e.preventDefault();
