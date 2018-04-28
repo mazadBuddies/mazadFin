@@ -2,7 +2,6 @@
         session_start();
         include "../../../config/directors.config.php";
         include CLASS_DIR . "autoLoader.class.php";
-
         $masterUser = new user ();
         $IdData = $masterUser->getUserInfoById($_SESSION['id']);
 ?>

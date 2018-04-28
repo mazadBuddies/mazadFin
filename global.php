@@ -28,6 +28,10 @@ function getLastId($tableName, $colName= 'id'){
     return ($sz > 0 )?$allData[$sz - 1][$colName]:-1;
 }// end of function getLastId
 
+/*
+ * is function that let the user start a new session at server
+ * parameter: 1, 2, 3
+ */
 function isLogin(){
     return (isset($_SESSION['firstName']));
 }

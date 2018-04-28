@@ -1,4 +1,3 @@
-
 <?php
 $masterSession = new session();
 $sessionData = $masterSession->getAllSessions();
@@ -7,10 +6,12 @@ echo "<pre>";
 echo "There is no sessions right now";
 echo "</pre>";    
 }
+/*
 else{
 echo "<pre>";
 print_r($sessionData);
-echo "</pre>";}
+echo "</pre>";
+}*/
 ?>
 <section class="dashboard col-11">
     <div class="container-fluid">
@@ -37,11 +38,9 @@ echo "</pre>";}
                                             <span>TILL OUTCOME</span>
                                         </span>
                                     </div>
-
                                     <div class="details">';
                                     echo $sessionData[$i]['description']; 
                                     echo '</div>
-
                                     <div class="userInfo">
                                         <div class="cir">
                                             <img src="';
@@ -52,13 +51,11 @@ echo "</pre>";}
                                             echo $sessionData[$i]['firstName'];
                                         echo '</div>
                                     </div>
-
                                     <div class="enter">
                                         <div class="cir">
                                             <i class="fa fa-angle-right"></i>
                                         </div>
                                     </div>
-
                                     <div class="bottom-panel">
                                         <div class="money">
                                             <i class="fas fa-money-bill-alt"></i>
@@ -91,13 +88,13 @@ echo "</pre>";}
                                             <span>TILL OUTCOME</span>
                                         </span>
                                     </div>
-
                                     <div class="details">';
                                     echo $sessionData[$i+1]['description']; 
-                                    
                                     echo 
                                     '</div>
-
+                                    <div class="details">
+                                        A hot-shot race-car named Lightning McQueen gets waylaid in Radiator Springs
+                                    </div>
                                     <div class="userInfo">
                                         <div class="cir">
                                             <img src="';
@@ -108,35 +105,30 @@ echo "</pre>";}
                                             echo $sessionData[$i+1]['firstName'];
                                         echo '</div>
                                     </div>
-
                                     <div class="enter">
                                         <div class="cir">
                                             <i class="fa fa-angle-right"></i>
                                         </div>
                                     </div>
-
                                     <div class="bottom-panel">
                                         <div class="money">
                                             <i class="fas fa-money-bill-alt"></i>
                                             <span class="number">';
                                             echo $sessionData[$i+1]['startPrice'];
-                                            
+                                            echo $sessionData[$i+1]['sessionEnters'];
                                             echo'<sup>EGP</sup>
                                             </span>
                                         </div>
                                         <div class="users">
                                             <i class="fas fa-users"></i>
                                             <span class="number">';
-                                            echo $sessionData[$i+1]['sessionEnters'];
                                             echo'</span>
                                         </div>
                                     </div>
                                 </div>';
                             }
                             echo '</div><!-- end of row-->';
-                }
-                ?>
+                }?>
         </div>
-
     </div>
 </section>
