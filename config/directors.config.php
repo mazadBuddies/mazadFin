@@ -24,7 +24,7 @@ test test test
 
 
 
-$mashKind = "windows";// linux
+$mashKind = "linux";// linux
 ini_set('display_errors', 1);//this for show errs
 error_reporting(~0);// the same target
 $dirAsString = "";
