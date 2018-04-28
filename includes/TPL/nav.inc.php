@@ -1,5 +1,6 @@
 <nav class="nav-bar">
     <div class="container-fluid">
+
         <div class="row">
             <div class="brand col-6">
                 <div class="row">
@@ -29,7 +30,6 @@
             </div>
 
             <div class="col-3">
-
                 <div class="row">
                     <div class="newSession col-1">
                         <div class="cir">
