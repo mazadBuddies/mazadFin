@@ -23,6 +23,7 @@
                     <span class="balance">
                         <span class="myBalance2">
                             <?php
+                                //print_r($_SESSION);
                                 $masterWallet = new wallet();
                                 $myWallet = $masterWallet->getWalletByUserId($_SESSION['id']);
                                 echo (sizeof($myWallet) > 0)?$myWallet[0]['realBalance']:'0';
@@ -59,8 +60,8 @@
                                 <li>
                                     <i class="far fa-smile"></i>
                                     help
+                                    <li>
                                 </li>
-                                <li>
                                     <a href="logout.php" class="logOut"><i class="fas fa-power-off"></i> logout</a>
                                 </li>
                             </ul>
