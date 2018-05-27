@@ -3,8 +3,18 @@
     include ROOT_APP . "init.php";
     if(isLogin())header("location:index.php");
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
+        echo $_SESSION['id'];
+        print_r($_POST);
         $masterUser = new user();
-        (isset($_POST['firstName']))?$masterUser->signUp() : $masterUser->logIn($_POST['email'], $_POST['password']);
+        if(isset($_POST['firstName'])){
+            $masterUser->signUp();
+        }else{
+            if($masterUser->logIn($_POST['email'], $_POST['password'])){
+                header("location:index.php");
+            }else{
+                echo "BAAAAAAAAAAAD";
+            }
+        }
     }//end of if
 ?>
 <section class="body">

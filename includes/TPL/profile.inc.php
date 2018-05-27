@@ -1,13 +1,15 @@
 <?php
-    $masterUser = new user ();
-    $IdData = $masterUser->getUserInfoById($_SESSION['id']);
-    $PS = $masterUser->getPowerSession($_SESSION['id']);
-    $following = $masterUser->getFollwing($_SESSION['id']);
-    $follower = $masterUser->getFollower($_SESSION['id']);
-    $master2 = new ActivitySession();
-    $activity = $master2->getTypeOfSession($_SESSION['id']);
-    $masterWallet = new ActivityWallet();
-    $activityData = $masterWallet->getAllActivityWallet();
+    $masterUser     = new user();
+    $master2        = new ActivitySession();
+    $masterWallet   = new ActivityWallet();
+    $masterFeed     = new feedback();
+    $IdData         = $masterUser->getUserInfoById($_SESSION['id']);
+    $PS             = $masterUser->getPowerSession($_SESSION['id']);
+    $following      = $masterUser->getFollwing($_SESSION['id']);
+    $follower       = $masterUser->getFollower($_SESSION['id']);
+    //$activity       = $master2->getTypeOfSession($_SESSION['id']);
+    $activity = array();
+    $activityData   = $masterWallet->getAllActivityWallet();
 ?>
 <section class="profile col-11">
         <div class="container-fluid">
@@ -33,8 +35,7 @@
                                     </ul>
                                 </div>
                         <div class="img">
-                            <img src=<?php $master = new user();
-                            $master->getImgPath();?> alt=""/>
+                            <img src=<?php $masterUser->getImgPath();?> alt=""/>
                             <!--acive here-->
                         </div>
                     </div>
@@ -202,26 +203,29 @@
                                                 <th>Final Price</th>
                                             </tr>
                                         <?php
-                                        for($i=sizeof( $activity)-1;$i>=0;$i--)
-                                        {
-                                            echo'<tr>
-                                                <th>
-                                                    <i class="fa fa-stop-circle"></i>
-                                                </th>
-                                                <th>';
-                                                echo$activity[$i]['date'];
-                                                echo'</th>
-                                                <th>';
-                                                echo$activity[$i]["desc"];
-                                                echo'</th>
-                                                <th>';
-                                                echo $activity[$i]["status"];
-                                                echo'</th>
-                                                <th><span>';
-                                                echo  $activity[$i]["finalPrice"];
-                                                echo '</span><sup>EGP</sup></th>
-                                            </tr>';
-                                        }
+                                            if((int)sizeof($activity) > 0)
+                                            {
+                                                for($i=sizeof( $activity)-1;$i>=0;$i--)
+                                                {
+                                                    echo'<tr>
+                                                        <th>
+                                                            <i class="fa fa-stop-circle"></i>
+                                                        </th>
+                                                        <th>';
+                                                        echo$activity[$i]['date'];
+                                                        echo'</th>
+                                                        <th>';
+                                                        echo$activity[$i]["desc"];
+                                                        echo'</th>
+                                                        <th>';
+                                                        echo $activity[$i]["status"];
+                                                        echo'</th>
+                                                        <th><span>';
+                                                        echo  $activity[$i]["finalPrice"];
+                                                        echo '</span><sup>EGP</sup></th>
+                                                    </tr>';
+                                                }
+                                            }//end of if
                                         ?>
                                         </table><!-- end of div table-->
                                     </div><!-- end of div session-->
@@ -259,7 +263,6 @@
                         include "profile_pops/following.inc.php";
                     ?>
                 </div><!-- end of div follow-->
-
                 <div class="col-12 feedbacks">
                     <h2> Feedbacks</h2>
                     <div class="tbl">
@@ -272,41 +275,40 @@
                                 <th>Details</th>
                             </tr>
                             <?php
-                            $masterFeed = new feedback();
-                            $myFeeds = $masterFeed->getAllMyFeedBacks($_SESSION['id']);
-                            if(sizeof($myFeeds)>0){
-                            for($i=sizeof($myFeeds)-1; $i>=0;$i--){
-                                echo'<tr>
-                                        <th>
-                                            <div class="cir">
-                                                <img src="';
-                                                echo $myFeeds[$i]['photo'];
-                                                echo'" alt="">
-                                            </div>
-                                        </th>
-                                    <th>';
-                                    echo $myFeeds[$i]['name'];
-                                    echo'</th>
-                                    <th>
-                                        <div class="stars" data-rate = "';
-                                        echo $myFeeds[$i]['stars'];
-                                        echo '">
-                                            <i class="far fa-star 1"></i>
-                                            <i class="far fa-star 2"></i>
-                                            <i class="far fa-star 3"></i>
-                                            <i class="far fa-star 4"></i>
-                                            <i class="far fa-star 5"></i>
-                                        </div>
-                                    </th>
-                                    <th>';
-                                    echo $myFeeds[$i]['date'];
-                                    echo '</th>
-                                    <th>';
-                                    echo $myFeeds[$i]['feedback'];;
-                                    echo '</th>
-                                </tr>';
-                            }
-                        }   
+                                $myFeeds = $masterFeed->getAllMyFeedBacks($_SESSION['id']);
+                                if(sizeof($myFeeds)>0){
+                                    for($i=sizeof($myFeeds)-1; $i>=0;$i--){
+                                        echo'<tr>
+                                                <th>
+                                                    <div class="cir">
+                                                        <img src="';
+                                                        echo $myFeeds[$i]['photo'];
+                                                        echo'" alt="">
+                                                    </div>
+                                                </th>
+                                            <th>';
+                                            echo $myFeeds[$i]['name'];
+                                            echo'</th>
+                                            <th>
+                                                <div class="stars" data-rate = "';
+                                                echo $myFeeds[$i]['stars'];
+                                                echo '">
+                                                    <i class="far fa-star 1"></i>
+                                                    <i class="far fa-star 2"></i>
+                                                    <i class="far fa-star 3"></i>
+                                                    <i class="far fa-star 4"></i>
+                                                    <i class="far fa-star 5"></i>
+                                                </div>
+                                            </th>
+                                            <th>';
+                                            echo $myFeeds[$i]['date'];
+                                            echo '</th>
+                                            <th>';
+                                            echo $myFeeds[$i]['feedback'];;
+                                            echo '</th>
+                                        </tr>';
+                                    }// end of for
+                                }//end of if
                             ?>
                         </table>
                     </div><!--end of div.tbl-->

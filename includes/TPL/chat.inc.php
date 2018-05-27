@@ -4,6 +4,7 @@
             <div class="col-8 chatMessage">
                 <div class="messages">
                             <?php 
+                            $activeSessionId = 1;
                             $messageSize = sizeof($masterSession->getSessionMessagesById($activeSessionId));
                             $Sessionmessages = $masterSession->getSessionMessagesById($activeSessionId);
                             for($i=0; $i<$messageSize; $i++){

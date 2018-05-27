@@ -1,14 +1,15 @@
 <?php
 include "../../../config/directors.config.php";
-include "../../../class/autoLoader.class.php";?>
+include "../../../class/autoLoader.class.php";
+?>
 <section>
     <div class="login col-lg-4 col-md-6 col-sm-8">
         <div class="form">
             <div class="myCon">
                 <?php
-                    $masterWallet = new wallet();
+                    /*$masterWallet = new wallet();
                     $myWallet = $masterWallet->getWalletByUserId($_SESSION['id']);
-                    $wal = sizeof($myWallet);
+                    $wal = sizeof($myWallet);*/
                 ?>
                 <h2 class="signIn head"><i class="fa fa-bullseye"></i> Create Wallet</h2>
                 <form method="POST" class="signUp ajax submit" data-method="post" autocomplete="off" enctype="multipart/form-data" id="editProfile" data-action="INSERT_WALLET" data-accept="1" data-url="class/wallet.class.php" data-function="7">

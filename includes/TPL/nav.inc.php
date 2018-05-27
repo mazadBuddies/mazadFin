@@ -1,6 +1,5 @@
 <nav class="nav-bar">
     <div class="container-fluid">
-
         <div class="row">
             <div class="brand col-6">
                 <div class="row">
@@ -16,14 +15,13 @@
                 </div>
             </div>
             <div class="availble-bounce col-3">
-                <div>   
+                <div>
                     <span class="bold">
                         Available Balance:
                     </span>
                     <span class="balance">
                         <span class="myBalance2">
                             <?php
-                                //print_r($_SESSION);
                                 $masterWallet = new wallet();
                                 $myWallet = $masterWallet->getWalletByUserId($_SESSION['id']);
                                 echo (sizeof($myWallet) > 0)?$myWallet[0]['realBalance']:'0';
@@ -51,7 +49,7 @@
                     <div class="col-2 info">
                         <div class="cir" id="openProfile">
                             <img src= <?php 
-                            $master->getImgPath();
+                                $master->getImgPath();
                             ?> alt="">
                         </div>
                         <i class="fa fa-angle-down blur ll"></i>
@@ -62,6 +60,7 @@
                                     help
                                     <li>
                                 </li>
+                                <li>
                                     <a href="logout.php" class="logOut"><i class="fas fa-power-off"></i> logout</a>
                                 </li>
                             </ul>

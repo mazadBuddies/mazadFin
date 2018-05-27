@@ -167,8 +167,10 @@
 
         public function mkInsertArray($arrCols , $arrVals, $tragS = array()){
             $targ = $tragS;// set passed array and set new values 
+            if((int)sizeof($arrCols) > 0){
                 for($i = 0; $i < (int)sizeof($arrCols); $i++)
-                    $targ[':' . $arrCols[$i]] = $arrVals[$i];// make array [key=>value]
+                $targ[':' . $arrCols[$i]] = $arrVals[$i];// make array [key=>value]
+            }
             return $targ;
         }// end of mkInsertArray function
 

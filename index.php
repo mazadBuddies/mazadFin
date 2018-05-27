@@ -1,14 +1,15 @@
 <?php
 /* 6260 */
-    setcookie('dir', 'dashboard', time() + (86400 * 30));
+    //setcookie('dir', 'dashboard', time() + (86400 * 30));
     include "config/directors.config.php";
     include ROOT_APP . "init.php";
-    //if(!isLogin())header("location:mazadHome.php");
+    if(!isLogin())
+        header("location:login.php");
     include INCLUDES_DIR . "nav.inc.php";
     include INCLUDES_DIR . "side.inc.php";
     include COMP_INC_DIR . "magicButton.comp.php";
 ?>
-
+<span class="session" data-trigger="false"></span>
 <section class="content">
     <div class="overlay">
         <i class="far fa-times-circle exit-icon"></i>

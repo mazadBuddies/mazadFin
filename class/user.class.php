@@ -16,12 +16,15 @@ class user{
     private $imgPath;
     private $arrayOfData;
     private $imagePathRoot = ROOT_APP . 'imgs/';
+    private $connect;
+    private $accessTable = "user";
     public function logIn($email, $password){
         $connect = new dataBase(HOST, DB_NAME, DB_USER, DB_PASS);
         $connect->setTable('user');
-        $password = sha1($password);
-        $allData = $connect->select("*", array('email', 'userPassword'),array($email, $password));
-        if(sizeof($allData) > 0){
+
+        $allData = $connect->select("*", array('email', 'userPassword'),array($email, sha1($password)));
+        //echo "GOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOD".(int)sizeof($allData);
+        if((int)sizeof($allData) > 0){
             $_SESSION['id']             = $allData[0]['id'];
             $_SESSION['firstName']      = $allData[0]['firstName'];
             $_SESSION['lastName']       = $allData[0]['lastName'];
@@ -30,16 +33,10 @@ class user{
             $_SESSION['email']          = $allData[0]['email'];
             $_SESSION['gender']         = $allData[0]['gender'];
             $_SESSION['userRole']       = $allData[0]['userRole'];
-            $_SESSION['following']      = $allData[0]['following'];
-            $_SESSION['followers']      = $allData[0]['followers'];
-            $_SESSION['biddings']       = $allData[0]['biddings'];
-            $_SESSION['createdSessions']= $allData[0]['createdSessions'];
             $_SESSION['birthDate']      = $allData[0]['birthDate'];
-            $_SESSION['user']           = new user($this->email, $this->password);
-            $_SESSION['user']->setData();
-            header("location:index.php");
+            return true;
         }
-
+        return false;
     }//end of function
 
     public function signUp(){
@@ -120,14 +117,9 @@ class user{
         $this->lastName  = $_SESSION['lastName'];
         $this->email     = $_SESSION['email'];
         $this->imgPath   = $_SESSION['imagePath'];
-        $this->password  = $_SESSION['password'];
-        $this->userName  = $_SESSION['userName'];
         $this->gender    = $_SESSION['gender'];
         $this->userRole  = $_SESSION['userRole'];
-        $this->following = $_SESSION['following'];
-        $this->followers = $_SESSION['followers'];
         $this->birthDate = $_SESSION['birthDate'];
-        $this->createdSessions = $_SESSION['createdSessions'];
     }
 
     public function getFullName(){
@@ -177,33 +169,40 @@ class user{
     }//end of fucntion getPowerSession
 
     public function getFollwing($id){
-         $connect = new dataBase (HOST , DB_NAME , DB_USER , DB_PASS);
-         $connect->setTable('follow');
+        $connect = new dataBase (HOST , DB_NAME , DB_USER , DB_PASS);
+        $connect->setTable('follow');
          $follow=$connect->select('*' , array('fromId') , array($id));
-         $connect->setTable('user');
-         $follwingUserInfo = array();
-         for ($i=0; $i < sizeof($follow) ; $i++) {
+        $connect->setTable('user');
+        $follwingUserInfo = array();
+        for ($i=0; $i < sizeof($follow) ; $i++) {
             $UserInfo=$connect->select('firstName, imagePath, id', array('id'), array($follow[$i]['toId']));
             $arrayInfo= array("firstName"=> $UserInfo[0]['firstName'] , "id"=> $UserInfo[0]['id'], "imagePath"=> $UserInfo[0]['imagePath']);
             $followingUserInfo[] = $arrayInfo;
-         }
-         return $followingUserInfo ;
-
+        }
+        return $followingUserInfo ;
     }
 
-     public function getFollower($id){
-         $connect = new dataBase (HOST , DB_NAME , DB_USER , DB_PASS);
-         $connect->setTable('follow');
-         $follow=$connect->select('*' , array('toId') , array($id));
-         $connect->setTable('user');
-         $follwingUserInfo = array();
-         for ($i=0; $i < sizeof($follow) ; $i++) {
-            $UserInfo=$connect->select('firstName, imagePath, id', array('id'), array($follow[$i]['fromId']));
-            $arrayInfo= array("firstName"=> $UserInfo[0]['firstName'] , "id"=> $UserInfo[0]['id'], "imagePath"=> $UserInfo[0]['imagePath']);
-            $followingUserInfo[] = $arrayInfo;
-         }
-         return $followingUserInfo ;
+    public function __construct(){
+        $this->connect = new dataBase (HOST , DB_NAME , DB_USER , DB_PASS);
+        $this->connect->setTable($this->accessTable);
+    }
 
+    public function getUserDataById($select, $id){
+        return $this->connect->select($select, array("id"), array($id));
+    }//end of function getUserDataById
+
+    public function getFollower($id){
+        $connect = new dataBase (HOST , DB_NAME , DB_USER , DB_PASS);
+        $connect->setTable('follow');
+        $follow=$connect->select('*' , array('toId') , array($id));
+        $connect->setTable('user');
+        $follwingUserInfo = array();
+        for ($i=0; $i < sizeof($follow) ; $i++) {
+        $UserInfo=$connect->select('firstName, imagePath, id', array('id'), array($follow[$i]['fromId']));
+        $arrayInfo= array("firstName"=> $UserInfo[0]['firstName'] , "id"=> $UserInfo[0]['id'], "imagePath"=> $UserInfo[0]['imagePath']);
+        $followingUserInfo[] = $arrayInfo;
+        }
+        return $followingUserInfo ;
     }
 
     public function getAge($id){
@@ -221,45 +220,45 @@ class user{
     }
 
     public function generateRank($Rank){
-       if($Rank <= 200){
-        return "Class J";
-       }
-       elseif ($Rank > 200 && $Rank <= 399) {
-           return "Class I";
-       }
-       elseif ($Rank >=400 && $Rank <= 599) {
-           return "Class H";
-       }
-       elseif ($Rank >=600  && $Rank <= 799) {
-           return "Class G";
-       }
-       elseif ($Rank >=800 && $Rank <= 999) {
-           return "Class F";
-       }
-       elseif ($Rank >= 1000 && $Rank <= 1199) {
-           return "Class E";
-       }
-       elseif ($Rank >=1200 && $Rank <= 1399) {
-           return "Class D";
-       }
-       elseif ($Rank >= 1400 && $Rank <= 1599) {
-           return "Class C";
-       }
-       elseif ($Rank >= 1600 && $Rank <= 1799) {
-           return "Class B";
-       }
-       elseif ($Rank > 1800 && $Rank <= 1999) {
-           return "Class A";
-       }
-       elseif ($Rank >=2000 && $Rank <= 2199) {
-           return "Expert";
-       }
-       elseif ($Rank > 2200) {
-           return "Class National Master";
-       }
-       elseif ($Rank >2400) {
-           return "Class Senior Master";
-       }
+        if($Rank <= 200){
+            return "Class J";
+        }
+        elseif ($Rank > 200 && $Rank <= 399) {
+            return "Class I";
+        }
+        elseif ($Rank >=400 && $Rank <= 599) {
+            return "Class H";
+        }
+        elseif ($Rank >=600  && $Rank <= 799) {
+            return "Class G";
+        }
+        elseif ($Rank >=800 && $Rank <= 999) {
+            return "Class F";
+        }
+        elseif ($Rank >= 1000 && $Rank <= 1199) {
+            return "Class E";
+        }
+        elseif ($Rank >=1200 && $Rank <= 1399) {
+            return "Class D";
+        }
+        elseif ($Rank >= 1400 && $Rank <= 1599) {
+            return "Class C";
+        }
+        elseif ($Rank >= 1600 && $Rank <= 1799) {
+            return "Class B";
+        }
+        elseif ($Rank > 1800 && $Rank <= 1999) {
+            return "Class A";
+        }
+        elseif ($Rank >=2000 && $Rank <= 2199) {
+            return "Expert";
+        }
+        elseif ($Rank > 2200) {
+            return "Class National Master";
+        }
+        elseif ($Rank >2400) {
+            return "Class Senior Master";
+        }
     }
 
     public function getLastVisit($id){

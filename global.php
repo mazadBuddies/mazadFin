@@ -33,5 +33,5 @@ function getLastId($tableName, $colName= 'id'){
  * parameter: 1, 2, 3
  */
 function isLogin(){
-    return (isset($_SESSION['firstName']));
+    return (isset($_SESSION['id']));
 }

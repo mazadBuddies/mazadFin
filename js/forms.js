@@ -190,6 +190,7 @@ function ajaxFileSubmit(e){
     formData.append("ACTION", $(this).data('action'));
     uploadeFile("images", "images", url, formData, function (data){
         console.log(data);
+        //alert(data;)
         if(data == accept)//here
         {
             $("form#mkSession").fadeOut(500, function(){
@@ -205,10 +206,7 @@ function ajaxFileSubmit(e){
         }// end of ig
     });// end of accept action function
 }// end of function
-function defaultAjaxFunction(data){
-    alert(data);
-    return 0;
-}
+
 function editName(name){
     $('span.fullName').text(name);
 }
@@ -216,22 +214,6 @@ function editName(name){
 function editFirstName(name){
     $('div.firstName2').text(name);
 }
-
-function editProfile(data){
-    var JSONInfo = JSON.parse(data);
-    editName(JSONInfo.firstName + " " +JSONInfo.lastName);
-    editFirstName(JSONInfo.firstName);
-}
-var ajaxSuccessFunctions = [defaultAjaxFunction ,
-                            addedNewOfferSuc,
-                            activateButton,
-                            deactivateButton, 
-                            deleteCategory,
-                            deleteSession,
-                            clearReport,
-                            chngWalletValue,
-                            editProfile
-                        ]; // this array for ajax success functions
 
 function moneyFormat(money){
     money = String(money);
@@ -243,13 +225,6 @@ function moneyFormat(money){
     
 }
 
-
-function chngWalletValue(data){
-    "use strict";
-    $(".myBalance2").text(moneyFormat(data));
-    $(".myBalance").text(data);
-
-}
 function ajaxSubmit(e){
     e.preventDefault();
     var url      = $(this).data("url");
