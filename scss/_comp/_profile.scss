@@ -98,6 +98,11 @@
         div.row2{
             
             div.wallet{
+                table{
+                    @include tbl();
+                    width: 100%;
+                    margin-bottom:30px;
+                }
                 @include box-style(1);
                 margin-right: (1/12) * 100%;
                 button{

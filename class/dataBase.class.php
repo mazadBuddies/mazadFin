@@ -50,6 +50,7 @@
         }//end of connect function
 
         public function refreashTables(){
+            
             $this->curQuery = 'show Tables'; // to get all tables
             $this->tables   = $this->executeQuery(false, true); // set all tables in table varible
         }//end of refreshTables function
@@ -166,9 +167,10 @@
 
         public function mkInsertArray($arrCols , $arrVals, $tragS = array()){
             $targ = $tragS;// set passed array and set new values 
+            if((int)sizeof($arrCols) > 0){
                 for($i = 0; $i < (int)sizeof($arrCols); $i++)
-                    $targ[':' . $arrCols[$i]] = $arrVals[$i];// make array [key=>value]
-                    
+                $targ[':' . $arrCols[$i]] = $arrVals[$i];// make array [key=>value]
+            }
             return $targ;
         }// end of mkInsertArray function
 
@@ -197,7 +199,7 @@
                     return true;
             }
             return false;
-        }//end of function isDatabase
+        }//end of function isDatabase 
         public function getLastId(){
             $this->curQuery = "SELECT  MAX(id) AS max FROM $this->curTable";
             return $this->executeQuery(false, true);
@@ -224,6 +226,7 @@
         public function mk(){
                 $Make = array();
                 if($this->isDatabase('mazad'))$Make[] = 'DROP DATABASE mazad';
+
                 $Make[] = 'CREATE DATABASE mazad';
                 $Make[] = 'USE mazad';
                 $Make[] = 'CREATE TABLE user (
@@ -231,6 +234,7 @@
                                 firstName varchar(255) NOT NULL, 
                                 lastName varchar(255) NOT NULL,
                                 gender TINYINT(2) NOT NULL,
+                                creditCard varchar(50) NOT NULL,
                                 userName varchar(255) NOT NULL, 
                                 email varchar(255) NOT NULL,
                                 birthDate date,
@@ -278,6 +282,7 @@
                                 currentUser int(11),
                                 finished TINYINT(2) DEFAULT 0,
                                 increamentValue int(11) DEFAULT 3,
+                                description VARCHAR(255),
                                 FOREIGN KEY (sessionOwnerId) REFERENCES user(id),
                                 FOREIGN KEY (currentUser) REFERENCES user(id))';
 
@@ -356,7 +361,7 @@
                     FOREIGN KEY (fromId) REFERENCES user(id),
                     FOREIGN KEY (sessionId) REFERENCES session(id)
                 );';
-                $Make = 'CREATE TABLE wallet(
+                $Make[] = 'CREATE TABLE wallet(
                     id int(11) AUTO_INCREMENT  PRIMARY KEY,
                     walletName varchar(255) NOT NULL,
                     realBalance int(11) NOT NULL,

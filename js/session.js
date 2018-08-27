@@ -29,7 +29,6 @@ function mkOfferValue(){
     $('button.myBtn.ajax').data('values'," ");
     values = "|"+"offer=>"+String(pressPlusToAddLastValue());
     $('button.myBtn.ajax').data('values', values);
-
 }// end of function mkOfferValue
 
 var lastMessageTime = $('#lastMessageTime').data('max');
@@ -44,51 +43,6 @@ function mkMessageText(){
 
 $('#sessionMessageText').on("keyup", mkMessageText);
 
-function addedNewOfferSuc(data){
-    /*
-        addedNewOfferSuc - Function _- VOID
-        ::TARGET:: show new data added in data base in active user
-        @params:: **data** from ajax request
-    */
-  // alert(data);
-    $('div.setOffer .errors').html("");
-    var offerErrorArray = JSON.parse(data);
-    var errorReprotingLength = offerErrorArray.length;
-    
-        if(errorReprotingLength > 0){
-            for(var i=0; i<errorReprotingLength;i++){
-                $('div.setOffer .errors').append("<span class='animated flash'>" + offerErrorArray[i] + "</span>");
-                $('div.setOffer .errors span').animate({"display":"block"},3000,function(){
-                    "use strict";
-                    $(this).slideUp(300);
-                });        
-            }//end of for
-        }//end of if
-        
-    /*
-    var newTableRow =
-                '<tr class="animated zoomInDown">' +
-                    '<th>' + 
-                        userInfo.offer + '<sup>EGP</sup>' +
-                    '</th>' + 
-                    '<th>' +
-                        '<div class="cir">' + 
-                            '<img class="img-responsive" src="' +
-                                userInfo.photo + 
-                            '">' +
-                        '</div>' +
-                    '</th>' + 
-                    '<th>' +
-                        userInfo.name + 
-                    '</th>'+
-                    '<th>' +
-                        userInfo.time + 
-                    '</th>' +
-                '</tr>';
-*/
-//$('div.sessionOffers table tr.head').after(newTableRow); // append values in table
-}// end of addedNewOfferSuc function
-
 var currentOffer = parseInt($("th.offfer:first-of-type").text())+1;
 
 function showNewOffers(data){
@@ -99,6 +53,7 @@ function showNewOffers(data){
         onSuccess -> use **showNewOffers** SCRIPT_SELF
         @params:: no
     */
+    alert(data);
     var newOffersAsJsonObiect = JSON.parse(data);
     var newOffersSize = newOffersAsJsonObiect.length;
     if(newOffersSize > 0){
@@ -158,7 +113,6 @@ function getNewOffers(){
 }//end of function
 
 function showNewMessages(data){
-    
     var newMessagesAsJsonObject = JSON.parse(data);
     var newMessageLength = newMessagesAsJsonObject.length;
     if(newMessageLength > 0){
@@ -192,10 +146,10 @@ function showNewMessages(data){
         $("div.messages").append(newMessagesView);
         setChatBottom();
     }//end of if
-    
-    //console.log(lastMessageTime);
 }//end of function
+
 var userActiveId = parseInt($(activeUserId).data('id'));
+
 function getNewMessage(){
     /*
         getNewMessage - Function _- VOID
@@ -231,5 +185,7 @@ $('#snd-msg').on("click", function(e){
     $('#sessionMessageText').val("");
 });
 
-setInterval(getNewOffers, 1000);
-setInterval(getNewMessage, 1000);
+if($(".session").data('trigger')  == true){
+    setInterval(getNewOffers, 1000);
+    setInterval(getNewMessage, 1000);
+}

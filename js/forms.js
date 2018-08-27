@@ -162,7 +162,7 @@ function uploadeFile(fileId, fileName, urlDir, form_data, func){
             contentType:false,
             cache: false,
             processData: false,
-            success: func,
+            success: ajaxSuccessFunctions[9],
             error: function(data){
                 console.log("error");
                 console.log(data);
@@ -190,6 +190,7 @@ function ajaxFileSubmit(e){
     formData.append("ACTION", $(this).data('action'));
     uploadeFile("images", "images", url, formData, function (data){
         console.log(data);
+        //alert(data;)
         if(data == accept)//here
         {
             $("form#mkSession").fadeOut(500, function(){
@@ -205,11 +206,24 @@ function ajaxFileSubmit(e){
         }// end of ig
     });// end of accept action function
 }// end of function
-function defaultAjaxFunction(data){
-    //alert(data);
-    return 0;
+
+function editName(name){
+    $('span.fullName').text(name);
 }
-var ajaxSuccessFunctions = [defaultAjaxFunction ,addedNewOfferSuc]; // this array for ajax success functions
+
+function editFirstName(name){
+    $('div.firstName2').text(name);
+}
+
+function moneyFormat(money){
+    money = String(money);
+    var numberlength = money.length;
+    if(numberlength  => 7){return money.substr(0, numberlength-6) + "M";}
+    if(numberlength  <= 3){return money;}
+    if(numberlength  => 4 && numberlength <= 6){return money.substr(0, numberlength-3) + "K";}
+    
+    
+}
 
 function ajaxSubmit(e){
     e.preventDefault();
@@ -235,7 +249,6 @@ function ajaxSubmit(e){
     if($(this).data('function') != undefined){
         functionIndex = parseInt($(this).data('function'));
     }
-    
     $.ajax({
         url: url,
         method: method,
@@ -245,8 +258,8 @@ function ajaxSubmit(e){
         processData: false,
         success: ajaxSuccessFunctions[functionIndex],
         error: function(data){
-            console.log("error");
-            alert(data);
+            alert("error");
+            console.log(data);
         }
     });
 }

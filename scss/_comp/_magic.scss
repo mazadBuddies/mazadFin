@@ -1,0 +1,49 @@
+div.magic{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    @include cir(20px);
+    background-color: $main-color;
+    z-index: 99999999;
+    font-size: $font-sm;
+    text-align: center;
+    color : $font-color;
+    @include box-shadow(0px 0px 10px $main-color);
+    cursor: pointer;
+    &:hover{
+        width: 50px;
+        height: 50px;
+        font-size: $font-lg;
+    }
+}
+div.big{
+    width: 50px;
+    height: 50px;
+    font-size: $font-lg;
+}
+div.magic.non{
+    display: none;
+    width: 50px;
+    height: 50px;
+    font-size: $font-lg;
+    transition: 0ms ;
+}
+
+div.non1{
+    right: 80px;
+}
+div.non2{
+    right: 140px;
+}
+div.non3{
+    right: 200px;
+    font-size: 30px;
+    padding-top: 3px
+}
+
+.smooth{
+    @include smooth();
+    &:hover{
+        @include smooth();
+    }
+}

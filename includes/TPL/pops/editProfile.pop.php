@@ -2,15 +2,14 @@
         session_start();
         include "../../../config/directors.config.php";
         include CLASS_DIR . "autoLoader.class.php";
-
         $masterUser = new user ();
         $IdData = $masterUser->getUserInfoById($_SESSION['id']);
 ?>
 
 <div class="form col-lg-4 col-md-6 col-sm-8" id="test">
-          <div class="myCon">
-               <h2 class="title"><i class="fa fa-bullseye"></i>Edit MY INFO </h2>
-                <form method="POST" class="signUp ajax submit" data-method="post" autocomplete="off" enctype="multipart/form-data" id="editProfile" data-action="Edit" data-accept="1" data-url="class/user.class.php">
+        <div class="myCon">
+            <h2 class="title"><i class="fa fa-bullseye"></i>Edit MY INFO </h2>
+                <form method="POST" class="signUp ajax submit" data-method="post" autocomplete="off" enctype="multipart/form-data" id="editProfile" data-action="Edit" data-accept="1" data-url="class/user.class.php" data-function="8">
                     <div class="row">
                         <div class="firstName col-6">
                             <label for="firstName" class="col-12">First Name</label>
@@ -28,28 +27,12 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="email col-12">
-                            <label for="email" class="col-12">Email address</label>
-                            <div class="border">
-                                <input type="email" name="email" class="col-12"  value="<?php echo $IdData[0]['email']?>"/>
-                            </div>
-                        </div>    
-                    </div>
-                    <div class="row">
                         <div class="userName col-12">
                             <label for="userName" class="col-12">Username</label>
                             <div class="border">
                                 <input type="text" class="col-12" name="userName"  value="<?php echo $IdData[0]['userName']?>"/>
                             </div>
                         </div>    
-                    </div>
-                    <div class="row">
-                        <div class="phone col-12">
-                            <label for="phoneNumber" class="col-12">Phone</label>
-                            <div class="border">
-                                <input type="tel" class="col-12" name="phoneNumber" placeholder="0-111-1111-111"/>
-                            </div>
-                        </div>
                     </div>
                     <div class="row">
                         <div class="password col-12">
@@ -68,8 +51,7 @@
                             </div>
                         </div>
                     </div>
-                      <input type="hidden" value="6" name="id"/>
-                      
+                    <input type="hidden" value="6" name="id"/>
                     <div class="sup">
                         <input type="submit" value = "EDIT INFO"/>
                     </div>
@@ -79,6 +61,4 @@
                 * By Editing your Info , you agree to changing your Profile Info. 
             </p>
         </div>
-        <script src="../../../js/jquery.min.js"></script>
-        <script src="../../../js/forms.js"></script>
-        <script src="../../../js/main.js"></script>
+

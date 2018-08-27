@@ -24,7 +24,7 @@ test test test
 
 
 
-$mashKind = "windows";// linux
+$mashKind = "linux";// linux
 ini_set('display_errors', 1);//this for show errs
 error_reporting(~0);// the same target
 $dirAsString = "";
@@ -44,6 +44,7 @@ define("INCLUDES_DIR",  ROOT_APP . "includes/TPL/");
 define("CLASS_DIR",     ROOT_APP . "class/");
 define("CONFIG_DIR",    ROOT_APP . "config/");
 define("PROFILE_POPS",  INCLUDES_DIR ."profile_pops/");
+define("COMP_INC_DIR",  INCLUDES_DIR ."compItem/");
 define("IMG_DIR",       ROOT_APP . "imgs/");
 define("JS_DIR",        "js/");
 define("UPLOADS_DIR",   ROOT_APP . "uploads/");
