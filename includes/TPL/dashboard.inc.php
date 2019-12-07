@@ -1,8 +1,8 @@
 <?php
-    $activeSessionId = 13;
+    $activeSessionId = $_GET['id'];
     $_SESSION['sessionId'] = $activeSessionId;
     $masterSession = new session();
-    $masterSession->getSessionById($activeSessionId);
+    $sessionData = $masterSession->getSessionById($activeSessionId);
     $offerTableData = $masterSession->getOffersBySesionId($activeSessionId);
 ?>
 

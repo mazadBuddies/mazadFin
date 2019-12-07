@@ -25,7 +25,10 @@
                 </tr>
             </table>
         </div>
-
+        <?php
+        $activeSessionId = $_GET['id'];
+        
+        ?>
         <div class="session-side Name col-4">
             <h2 class="align-left">Session Info</h2>
                 <table>

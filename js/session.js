@@ -195,7 +195,7 @@ function showNewMessages(data){
     
     //console.log(lastMessageTime);
 }//end of function
-var userActiveId = parseInt($(activeUserId).data('id'));
+//var userActiveId = parseInt($(activeUserId).data('id'));//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 function getNewMessage(){
     /*
         getNewMessage - Function _- VOID
@@ -231,5 +231,5 @@ $('#snd-msg').on("click", function(e){
     $('#sessionMessageText').val("");
 });
 
-setInterval(getNewOffers, 1000);
-setInterval(getNewMessage, 1000);
+//setInterval(getNewOffers, 1000);
+//setInterval(getNewMessage, 1000);

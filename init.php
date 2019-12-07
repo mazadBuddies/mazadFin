@@ -9,7 +9,6 @@ include CLASS_DIR . "autoLoader.class.php";
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta charset='utf-8'/>
     <title>MAZAD</title>
-    <link rel="stylesheet" href="fonts/SEGOEUI.ttf"/>
     <link rel="stylesheet" href="css/normalize.css" />
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/fontawesome-all.min.css" />

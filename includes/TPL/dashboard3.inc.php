@@ -2,9 +2,9 @@
 $masterSession = new session();
 $sessionData = $masterSession->getAllSessions();
 if(sizeof($sessionData)==0){
-echo "<pre>";
-echo "There is no sessions right now";
-echo "</pre>";    
+    echo "<pre>";
+    echo "There is no sessions right now";
+    echo "</pre>";    
 }
 /*
 else{
@@ -53,7 +53,7 @@ echo "</pre>";
                                     </div>
                                     <div class="enter">
                                         <div class="cir">
-                                            <i class="fa fa-angle-right"></i>
+                                            <a href="session.php?id=1"><i class="fa fa-angle-right"></i></a>
                                         </div>
                                     </div>
                                     <div class="bottom-panel">
