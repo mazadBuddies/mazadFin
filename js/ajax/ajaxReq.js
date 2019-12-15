@@ -1,5 +1,5 @@
 function addedNewOfferSuc(data){
-    alert(data);
+    //alert(data);
 
     return false;
 }
@@ -11,7 +11,7 @@ function submitForm(form){
         formData[node.name] = node.value;
     });
     $.post(url, formData).done(function (data) {
-        alert(data);
+        //alert(data);
     });
 }
 
@@ -106,7 +106,39 @@ function defaultAjaxFunction(data){
 }
 
 
-var ajaxSuccessFunctions = [defaultAjaxFunction , activateButton, deactivateButton, deleteCategory, deleteSession, clearReport]; // this array for ajax success functions
+function addedNewOfferSuc(data){
+    /*
+        addedNewOfferSuc - Function _- VOID
+        ::TARGET:: show new data added in data base in active user
+        @params:: **data** from ajax request
+    */
+  // alert(data);
+    $('div.setOffer .errors').html("");
+    var offerErrorArray = JSON.parse(data);
+    var errorReprotingLength = offerErrorArray.length;
+    
+        if(errorReprotingLength > 0){
+            for(var i=0; i<errorReprotingLength;i++){
+                $('div.setOffer .errors').append("<span class='animated flash'>" + offerErrorArray[i] + "</span>");
+                $('div.setOffer .errors span').animate({"display":"block"},3000,function(){
+                    "use strict";
+                    $(this).slideUp(300);
+                });        
+            }//end of for
+        }//end of if
+        
+    
+//$('div.sessionOffers table tr.head').after(newTableRow); // append values in table
+}// end of addedNewOfferSuc function
+
+var ajaxSuccessFunctions = [
+    defaultAjaxFunction 
+    , activateButton
+    , deactivateButton
+    , deleteCategory
+    , deleteSession
+    , clearReport
+    , addedNewOfferSuc]; // this array for ajax success functions
 
 function makeInsertArray(array, dataForm){
     for(var i=0;i<array.length;i++){

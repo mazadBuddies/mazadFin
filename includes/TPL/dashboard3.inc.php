@@ -109,8 +109,8 @@ echo "</pre>";
                                     </div>
                                     <div class="enter">
                                         <div class="cir">
-                                            <i class="fa fa-angle-right"></i>
-                                        </div>
+                                        <a href="session.php?id='.$sessionData[$i]['sessionId'].'" target="_blank"><i class="fa fa-angle-right"></i></a>
+                                    </div>
                                     </div>
                                     <div class="bottom-panel">
                                         <div class="money">

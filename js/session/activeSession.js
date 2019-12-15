@@ -37,7 +37,7 @@ function mkOfferValue(){
     $('button.myBtn.ajax').data('values'," ");
     
     values = "|"+"offer=>"+String(pressPlusToAddLastValue());
-    alert(values);
+    //alert(values);
     $('button.myBtn.ajax').data('values', values);
 
 }// end of function mkOfferValue
@@ -110,7 +110,10 @@ function showNewOffers(data){
         @params:: no
     */
     var newOffersAsJsonObiect = JSON.parse(data);
+    
     var newOffersSize = newOffersAsJsonObiect.length;
+    //GET_NEW_OFFERS
+    console.log(newOffersAsJsonObiect);
     if(newOffersSize > 0){
         for(var i = 0; i < newOffersSize; i++){
             var newTableRow =

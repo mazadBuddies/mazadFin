@@ -159,6 +159,13 @@ class user{
         return $data ;
     }
 
+    public function getUserWallet( $id ){
+        $connect = new dataBase (HOST , DB_NAME , DB_USER , DB_PASS);
+        $connect->setTable('wallet');
+        $data = $connect->select('*' , array('ownerId') , array($id));
+        return $data ;
+    }
+
     public function getImgPath(){
         echo ($_SESSION['imagePath'] == '')?"imgs/12.jpg":$_SESSION['imagePath'];
     }//end of getImage

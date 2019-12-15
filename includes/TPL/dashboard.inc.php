@@ -57,7 +57,7 @@
                         </div>
                         <div class="offerInput mrg-input">
                                 <input type="text" name="offer" placeholder="Enter Your Offer Here" class="offerPanel"/>
-                                <button class="myBtn offer ajax click addNewOffer"  data-url="class/session.class.php" data-action="INSERT_OFFER" data-accept="0" data-method="POST" data-values="" data-function="1">Offer</button>
+                                <button class="myBtn offer ajax click addNewOffer"  data-url="class/session.class.php" data-action="INSERT_OFFER" data-accept="0" data-method="POST" data-values="" data-function="6">Offer</button>
                         </div>
                         <div class="errors">
                         </div>

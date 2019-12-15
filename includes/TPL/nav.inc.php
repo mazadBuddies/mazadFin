@@ -1,3 +1,7 @@
+<?php 
+    $masterUserNav = new user();
+    $userData = $masterUserNav->getUserWallet($_SESSION['id']);
+?>
 <nav class="nav-bar">
     <div class="container-fluid">
 
@@ -22,7 +26,9 @@
                         Available Balance:
                     </span>
                     <span class="balance">
-                        <span>5.00</span>
+                        <span>
+                        <?php echo $userData[0]['realBalance'].".00";?>
+                        </span>
                         <sup>EGP<i class="fa fa-dolar"></i></sup>
                         <i class="fa fa-angle-down sz rotate"></i>
                     </span>
