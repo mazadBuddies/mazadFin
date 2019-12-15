@@ -9,7 +9,7 @@
     
 ?>
 
-<section class="content">    
+<section class="content">
     <div class="overlay">
         <i class="far fa-times-circle exit-icon"></i>
         <div class="edit"></div>
@@ -22,6 +22,4 @@
     include  INCLUDES_DIR ."profile.inc.php";
 ?>
 </section><!-- end of section conent-->
-<?php include ROOT_APP . "footer.php";
- 
-?>
+<?php include ROOT_APP . "footer.php";?>

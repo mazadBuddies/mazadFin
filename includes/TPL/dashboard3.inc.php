@@ -6,6 +6,8 @@ if(sizeof($sessionData)==0){
     echo "There is no sessions right now";
     echo "</pre>";    
 }
+    
+
 /*
 else{
 echo "<pre>";
@@ -53,7 +55,7 @@ echo "</pre>";
                                     </div>
                                     <div class="enter">
                                         <div class="cir">
-                                            <a href="session.php?id=1"><i class="fa fa-angle-right"></i></a>
+                                            <a href="session.php?id='.$sessionData[$i]['sessionId'].'" target="_blank"><i class="fa fa-angle-right"></i></a>
                                         </div>
                                     </div>
                                     <div class="bottom-panel">
@@ -128,7 +130,11 @@ echo "</pre>";
                                 </div>';
                             }
                             echo '</div><!-- end of row-->';
-                }?>
+                }
+                echo "<pre>";
+    echo $sessionData;
+    echo "</pre>";
+                ?>
         </div>
     </div>
 </section>

@@ -106,7 +106,7 @@ function defaultAjaxFunction(data){
 }
 
 
-//var ajaxSuccessFunctions = [defaultAjaxFunction , activateButton, deactivateButton, deleteCategory, deleteSession, clearReport]; // this array for ajax success functions
+var ajaxSuccessFunctions = [defaultAjaxFunction , activateButton, deactivateButton, deleteCategory, deleteSession, clearReport]; // this array for ajax success functions
 
 function makeInsertArray(array, dataForm){
     for(var i=0;i<array.length;i++){
@@ -123,7 +123,7 @@ function ajaxSubmit(e){
     var accept   = String($(this).data('accept'));
     var action   = $(this).data('action');
     var functionIndex = 0;
-    //mkOfferValue();
+    mkOfferValue();
     if($(this).data('values') != undefined){
         var dataAsString = $(this).data('values');
         var splitedArrayOfDataValue = dataAsString.split('|');
@@ -147,7 +147,7 @@ function ajaxSubmit(e){
         contentType: false,
         cache: false,
         processData: false,
-        //success: ajaxSuccessFunctions[functionIndex],
+        success: ajaxSuccessFunctions[functionIndex],
         error: function(data){
             alert("error");
             console.log(data);

@@ -103,7 +103,8 @@ class session{
 			"productName"	=> $productData[0]['productName'],
 			"tags"			=> $productData[0]['tags'],
 			"productImage"	=> $this->generateImagePath($productData[0]['imagePath']),
-			"catName"		=> $categorieNameGetById[0]['catiegorieName']
+			"catName"		=> $categorieNameGetById[0]['catiegorieName'],
+			"ownerId"		=> $sessionData[0]['sessionOwnerId'] 
 		);
 		
 		return $this->sessionData;
@@ -271,7 +272,9 @@ class session{
              		$connect->setTable("sessionEnters");
              		$sessionEntersCount = sizeof($connect->select('id', array('sessionId'), array($sessData[$i]['id'])));
              		
-             		$sessDataAsRow = array("sessionName" => $sessData[$i]['sessionName'],
+             		$sessDataAsRow = array(
+						 					"sessionId"=> $sessData[$i]['id'],
+						 					"sessionName" => $sessData[$i]['sessionName'],
              								"startPrice" => $sessData[$i]['startPrice'],
              								"firstName" =>  $userInfo[0]['firstName'],
              								"imagePath" =>  $userInfo[0]['imagePath'],
@@ -367,7 +370,7 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
 		$lol = new session('add');
 		echo "1";
 	}
-
+//////////////XXXXXXXXXXXXXXXXXXXXXXXXx
 	elseif($_POST['ACTION'] == 'INSERT_OFFER'){
 		//print_r($_POST);
 		$sessionToAddNewOffer = new session();

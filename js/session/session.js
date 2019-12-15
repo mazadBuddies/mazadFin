@@ -156,80 +156,8 @@ function getNewOffers(){
         }// end of error function
     });// end of ajax request
 }//end of function
-
-function showNewMessages(data){
-    
-    var newMessagesAsJsonObject = JSON.parse(data);
-    var newMessageLength = newMessagesAsJsonObject.length;
-    if(newMessageLength > 0){
-        var newMessagesView = '';
-        for(var i = 0 ; i < newMessageLength; i++){
-            if(userActiveId == parseInt(newMessagesAsJsonObject[i].fromId)){
-
-                newMessagesView = '<div class="message me row">' + 
-                '<div class="animated bounceInLeft message-text">' + 
-                    newMessagesAsJsonObject[i].message +
-                '</div>' +
-                '<div class="cir animated bounceInLeft">' +
-                    '<img class="img-responsive" src="' + newMessagesAsJsonObject[i].imagePath + '"/>' +
-                '</div>' +
-            '</div>';
-            }else{
-                newMessagesView = 
-                    '<div class="message other row animated bounceInLeft">' +
-                        '<div class="cir">' +
-                            '<img class="img-responsive" src="' +
-                                newMessagesAsJsonObject[i].imagePath +
-                            '"/>' +
-                        '</div>' +
-                        '<div class="message-text animated bounceInLeft">' +
-                            newMessagesAsJsonObject[i].message +
-                        '</div>' +
-                    '</div>';
-            }//end of else
-        }//end of for
-        lastMessageTime = newMessagesAsJsonObject[newMessageLength-1].messageTime;
-        $("div.messages").append(newMessagesView);
-        setChatBottom();
-    }//end of if
-    
-    //console.log(lastMessageTime);
-}//end of function
-//var userActiveId = parseInt($(activeUserId).data('id'));//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-function getNewMessage(){
-    /*
-        getNewMessage - Function _- VOID
-        ::TARGET:: get new message form data base which it not displayed in view
-        use php script -class/session.class.php- and $_POST->Action is *GET_NEW_MESSAGE*
-        onSuccess -> use **showNewOffers** SCRIPT_SELF
-        @params:: no
-    */
-
-    var formDataInfo = new FormData(); // create new form data
-    //lastMessageTime = $('#lastMessageTime').data('max');
-    formDataInfo.append("ACTION", "GET_NEW_MESSAGE"); // send which block of code will be executed
-    formDataInfo.append("lastDisplayed", lastMessageTime); // send last offer in session page arrived to it
-    
-    $.ajax({
-        url: "class/session.class.php",
-        method: "POST",
-        data: formDataInfo,
-        contentType:false,
-        cache:      false,
-        processData:false,
-        success:    showNewMessages,
-        error:      function(data){
-                    console.log("error");
-                    alert(data);
-        }// end of error function
-    });// end of ajax request
-}//end of function
-
 $('#snd-msg').on("click", function(e){
-    "use strict";
-    
+    "use strict";    
     $('#sessionMessageText').val("");
 });
 
-//setInterval(getNewOffers, 1000);
-//setInterval(getNewMessage, 1000);

@@ -1,3 +1,10 @@
+<?php 
+$masterSession = new session();
+$masterSessionUser = new user();
+$currentSessionData = $masterSession->getSessionById($_GET['id']);
+$currentSessionUser = $masterSessionUser->getUserInfoById($currentSessionData['ownerId']);
+
+?>
 <div class="session-info">
     <div class="row">
         <div class="col-4">
@@ -7,17 +14,17 @@
                     <img src="imgs/12.jpg" alt=""/>
                 </div>
                 <div class="user-info">
-                    <div class="full-name">Abdo Shaker</div>
+                    <div class="full-name"><?php echo $currentSessionUser[0]['firstName']." ".$currentSessionUser[0]['lastName']; ?></div>
                 </div>
             </div>
             <table>
                 <tr>
                     <th>RANK</th>
-                    <th class="deff">Candidate Master</th>
+                    <th class="deff"><?php echo $masterSessionUser->generateRank($currentSessionUser[0]['rate']);?> </th>
                 </tr>
                 <tr>
                     <th class="deff">RATE</th>
-                    <th>300</th>
+                    <th><?php echo $currentSessionUser[0]['rate'];?></th>
                 </tr>
                 <tr>
                     <th>Session Number</th>

@@ -9,14 +9,14 @@
     session offer input for press + and number to get last
     number and increament it 
 */
-function pressPlusToAddLastValue(){
+/*function pressPlusToAddLastValue(){
     "use strict";
     if($(".offerPanel").val().charAt(0) == '+'){
         return parseInt($(".offerPanel").val().substr(1, $(".offerPanel").val().length)) + (currentOffer-1);
     }//end of if
     return $(".offerPanel").val();
 }// end pressPlusToAddLastValue function
-
+*/
 function offerIsFitWithIncreamentValue(offer, increament){
     var arrayOfErrors = [];
     if(isNumber(offer) != 0){

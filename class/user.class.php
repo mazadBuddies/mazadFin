@@ -181,7 +181,7 @@ class user{
         $connect->setTable('follow');
         $follow=$connect->select('*' , array('fromId') , array($id));
         $connect->setTable('user');
-        $follwingUserInfo = array();
+        $followingUserInfo = array();
         for ($i=0; $i < sizeof($follow) ; $i++) { 
             $UserInfo=$connect->select('firstName, imagePath, id', array('id'), array($follow[$i]['toId']));
             $arrayInfo= array("firstName"=> $UserInfo[0]['firstName'] , "id"=> $UserInfo[0]['id'], "imagePath"=> $UserInfo[0]['imagePath']);
@@ -196,7 +196,7 @@ class user{
         $connect->setTable('follow');
         $follow=$connect->select('*' , array('toId') , array($id));
         $connect->setTable('user');
-        $follwingUserInfo = array();
+        $followingUserInfo = array();
         for ($i=0; $i < sizeof($follow) ; $i++) { 
         $UserInfo=$connect->select('firstName, imagePath, id', array('id'), array($follow[$i]['fromId']));
         $arrayInfo= array("firstName"=> $UserInfo[0]['firstName'] , "id"=> $UserInfo[0]['id'], "imagePath"=> $UserInfo[0]['imagePath']);
